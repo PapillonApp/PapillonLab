@@ -67,4 +67,10 @@
         background-color: transparent;
         color: white;
     }
+
+    .button:focus {
+        outline: 2px solid rgb(255, 255, 255);
+        outline-offset: 2px;
+        box-shadow: 0 0 8px rgba(0, 79, 137, 0.5);
+    }
 }
