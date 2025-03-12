@@ -1,20 +1,22 @@
-import { Calendar, Share, WandSparkles } from "lucide-react";
+import { QrCode, TagIcon } from "lucide-react";
 import Button from "./components/Button";
 import styles from "./page.module.css";
+import InformativeBox from "./components/InformativeBox";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Button icon={Share}>
-          <p>Exporter mes données</p>
-        </Button>
-        <Button icon={WandSparkles} variant="secondary">
-          <p>Papillon Magic+</p>
-        </Button>
-        <Button icon={Calendar} variant="informative">
-          <p>Ton emploi du temps</p>
-        </Button>
+        <div style={{ width: 400, display: "flex", flexDirection: "column", gap: 10}}>
+          <Button centered>
+            <p>Se connecter via mes identifiants</p>
+          </Button>
+          <Button leading={<QrCode absoluteStrokeWidth={true} size={20}/>} variant="secondary" centered>
+            <p>Utiliser un QR-Code</p>
+          </Button>
+
+          <InformativeBox icon={TagIcon}>Ton nom, prénom et classe</InformativeBox>
+        </div>
       </main>
     </div>
   );

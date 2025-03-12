@@ -1,27 +1,26 @@
 import React from "react"
 import styles from "./Button.module.css";
-import { LucideIcon } from "lucide-react";
 
 interface ButtonProps {
+    onPress?: () => void;
     children?: React.ReactNode;
-    icon?: LucideIcon;
-    variant?: "primary" | "secondary" | "informative"
-    disabled?: boolean
+    leading?: React.ReactNode;
+    variant?: "primary" | "secondary";
+    disabled?: boolean;
+    centered?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
+    onPress,
     children,
-    icon: Icon,
+    leading,
     variant = "primary",
-    disabled = false
+    disabled = false,
+    centered = false
 }) => {
     return (
-        <button className={`${styles.button} ${styles[variant]} ${disabled ? styles.disabled : ""}`}>
-            {variant === "informative" && 
-            <div className={`${styles.iconCircle} ${disabled ? styles.disabled : ""}`} style={{ backgroundColor: "#e3e2e2" }}>
-                {Icon && <Icon size={16} absoluteStrokeWidth={true}/>}
-            </div>}
-            {Icon && variant !== "informative" && <Icon size={16} absoluteStrokeWidth={true}/>}
+        <button className={`${styles.button} ${styles[variant]} ${centered ? styles.centered : ""} ${disabled ? styles.disabled : ""}`} onClick={onPress} disabled={disabled}>
+            {leading && <span style={{display: "flex"}}>{leading}</span>}
             {children}
         </button>
     )
