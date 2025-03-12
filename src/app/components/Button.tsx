@@ -8,6 +8,7 @@ interface ButtonProps {
     variant?: "primary" | "secondary";
     disabled?: boolean;
     centered?: boolean;
+    withShadow?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,10 +17,11 @@ const Button: React.FC<ButtonProps> = ({
     leading,
     variant = "primary",
     disabled = false,
-    centered = false
+    centered = false,
+    withShadow = false
 }) => {
     return (
-        <button className={`${styles.button} ${styles[variant]} ${centered ? styles.centered : ""} ${disabled ? styles.disabled : ""}`} onClick={onPress} disabled={disabled}>
+        <button className={`${styles.button} ${styles[variant]} ${centered ? styles.centered : ""} ${disabled ? styles.disabled : ""} ${withShadow ? styles.shadow : ""}`} onClick={onPress} disabled={disabled}>
             {leading && <span style={{display: "flex"}}>{leading}</span>}
             {children}
         </button>

@@ -1,34 +1,67 @@
-import { Calendar, ChartPie, Image, MoreHorizontal, QrCode, School, User } from "lucide-react";
-import Button from "./components/Button";
 import styles from "./page.module.css";
-import InformativeBox from "./components/InformativeBox";
+import Stars from "../..//public/assets/stars.svg";
+import Logo from "../..//public/assets/logo.svg";
+import Image from "next/image";
+import Button from "./components/Button";
+import { QrCode } from "lucide-react";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div style={{ width: 400, display: "flex", flexDirection: "column", gap: 10}}>
-          <Button centered>
-            <p>Se connecter via mes identifiants</p>
-          </Button>
-          <Button leading={<QrCode absoluteStrokeWidth={true} size={20}/>} variant="secondary" centered>
-            <p>Utiliser un QR-Code</p>
-          </Button>
-        </div>
-        <div style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: 10,
-          maxWidth: 600,
-          flexWrap: "wrap"
-        }}>
-          <InformativeBox icon={User}>Ton nom, prénom et classe</InformativeBox>
-          <InformativeBox icon={Image}>Ta photo de classe</InformativeBox>
-          <InformativeBox icon={Calendar}>Ton emploi du temps</InformativeBox>
-          <InformativeBox icon={ChartPie}>Tes notes et moyennes</InformativeBox>
-          <InformativeBox icon={School}>Tes absences et retard</InformativeBox>
-          <InformativeBox icon={MoreHorizontal}>Données diverses</InformativeBox>
-        </div>
+        <>
+          <Image src={Stars} alt={""} style={{
+            position: "absolute",
+            top: 0,
+            right: 0
+          }}/>
+
+          <div style={{
+            display: "flex",
+            width: 670,
+            padding: "28px 46px",
+            backgroundColor: "#FFFFFF",
+            gap: "30px",
+            flexDirection: "column",
+            alignItems: "center",
+            borderRadius: 22,
+            border: "1px solid rgba(0, 0, 0, 0.15)"
+          }}>
+            <Image src={Logo} alt={"Papillon Labs Logo"}/>
+            <span style={{
+              alignSelf: "stretch",
+              color: "#000",
+              textAlign: "center",
+              fontFamily: "Fixel Text",
+              fontSize: "17px",
+              fontStyle: "normal",
+              opacity: 0.55,
+              fontWeight: 600
+            }}>Bienvenue sur Papillon Labs ! Exportez vos données scolaires et contribuez à l’amélioration de Papillon Magic+. Connectez-vous avec votre compte scolaire pour continuer.</span>
+            <div style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%"
+            }}>
+              <Button centered>
+                <p>Se connecter via mes identifiants</p>
+              </Button>
+              <Button leading={<QrCode absoluteStrokeWidth={true} size={20}/>} variant="secondary" centered>
+                <p>Utiliser un QR-Code</p>
+              </Button>
+            </div>
+            <span style={{
+              alignSelf: "stretch",
+              color: "#000",
+              textAlign: "center",
+              fontFamily: "Fixel Text",
+              fontSize: "14px",
+              fontStyle: "normal",
+              opacity: 0.55,
+              fontWeight: 500
+            }}>Pour l’instant, seuls les comptes PRONOTE sont pris en charge.</span>
+          </div>
+        </>
       </main>
     </div>
   );
