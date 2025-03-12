@@ -45,3 +45,10 @@
     background-color: transparent;
     cursor: not-allowed;
 }
+
+.primary.disabled {
+    background-color: #004F89;
+    color: white;
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
