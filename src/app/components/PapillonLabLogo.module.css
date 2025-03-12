@@ -1,0 +1,9 @@
+.logo {
+    fill: #004F89
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo {
+        fill: white
+    }
+}

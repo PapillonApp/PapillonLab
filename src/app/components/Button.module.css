@@ -56,3 +56,15 @@
 .shadow {
     box-shadow: 0px 4px 9.6px 0px rgba(0, 0, 0, 0.25);
 }
+
+@media (prefers-color-scheme: dark) {
+    .primary {
+        background-color: #FFFFFF;
+        color: black;
+    }
+
+    .secondary {
+        background-color: transparent;
+        color: white;
+    }
+}
