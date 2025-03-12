@@ -8,10 +8,10 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <div style={{ width: 400, display: "flex", flexDirection: "column", gap: 10}}>
-          <Button centered disabled>
+          <Button centered>
             <p>Se connecter via mes identifiants</p>
           </Button>
-          <Button leading={<QrCode absoluteStrokeWidth={true} size={20}/>} variant="secondary" centered disabled>
+          <Button leading={<QrCode absoluteStrokeWidth={true} size={20}/>} variant="secondary" centered>
             <p>Utiliser un QR-Code</p>
           </Button>
         </div>
