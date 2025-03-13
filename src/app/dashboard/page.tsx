@@ -6,8 +6,7 @@ import Button from "../components/Button";
 import { Share, WandSparkles } from "lucide-react";
 
 export default function Dashboard() {
-  const [expanded, setExpanded] = useState(true);
-  const [activeButton, setActiveButton] = useState<string | null>(null);
+  const [activeButton, setActiveButton] = useState<string | null>("export");
 
   const handleExportClick = () => {
     console.log("Exporter mes données en légende");
@@ -20,8 +19,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className={`${styles.page} ${expanded ? styles.expanded : styles.collapsed}`}>
-      <Sidebar onToggle={setExpanded}>
+    <div className={`${styles.page}`}>
+      <Sidebar>
         <Button
           variant={activeButton === "export" ? "primary" : "secondary"}
           leading={<Share absoluteStrokeWidth={true} size={20} />}

@@ -1,25 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Sidebar.module.css";
 import PapillonLabsLogo from "./PapillonLabLogo";
+import Button from "./Button";
+import Image from "next/image";
 
-const Sidebar: React.FC<{ children: React.ReactNode; onToggle: (expanded: boolean) => void }> = ({ children, onToggle }) => {
-    const [expanded, setExpanded] = useState(true);
-
-
+const Sidebar: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <div className={`${styles.sidebar} ${expanded ? styles.expanded : styles.collapsed}`}>
+        <div className={styles.sidebar}>
             <div className={styles.header}>
-                <PapillonLabsLogo />
+                <PapillonLabsLogo width={200} />
             </div>
-            <div className={styles.menu}>{children}</div>
+            <div className={styles.pages}>{children}</div>
+            <Button
+                variant="secondary"
+                onPress={() => console.log("Logout")}
+                leading={
+                    <Image
+                        src={ localStorage.getItem("profilePicture") || "/defaultProfilePic.jpg" }
+                        alt="Profile Picture"
+                        width={35}
+                        height={35}
+                        style={{ objectFit: "cover", borderRadius: "50%" }}
+                        
+                    />
+                }
+            >
+                <p style={{ marginTop: 2 }}>{typeof window !== "undefined" ? localStorage.getItem("name") : ""}</p>
+            </Button>
         </div>
     );
 };
 
-const SidebarItem: React.FC<{ children: React.ReactNode; active?: boolean }> = ({ children, active }) => {
-    return (
-        <div className={`${styles.menuItem} ${active ? styles.active : ""}`}>{children}</div>
-    );
-};
-
-export { Sidebar, SidebarItem };
+export { Sidebar };

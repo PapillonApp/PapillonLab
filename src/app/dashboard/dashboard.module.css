@@ -2,14 +2,9 @@
   display: flex;
   flex-direction: row;
   transition: margin-left 0.3s ease-in-out;
-}
-
-.page.expanded {
-  margin-left: 250px;
-}
-
-.page.collapsed {
-  margin-left: 60px;
+  font-size: 17px;
+  color: #fff;
+  margin-left: 320px;
 }
 
 .content {
