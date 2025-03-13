@@ -1,4 +1,4 @@
-import { AccountKind, createSessionHandle, loginCredentials, loginQrCode, RefreshInformation } from "pawnote";
+import { AccountKind, createSessionHandle, loginCredentials, loginQrCode, loginToken, RefreshInformation, SessionHandle } from "pawnote";
 
 export async function loginWithQR(pin: string, dataFromQR: string): Promise<RefreshInformation> {
     const deviceUUID = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
@@ -57,4 +57,26 @@ export async function loginWithCredentials(url: string, username: string, passwo
     localStorage.setItem("username", username);
 
     return refresh;
+}
+
+export async function refreshSession(): Promise<SessionHandle> {
+    const deviceUUID = localStorage.getItem("deviceuuid");
+    const token = localStorage.getItem("token");
+    const url = localStorage.getItem("instance");
+    const username = localStorage.getItem("username");
+
+    const newSession = await createSessionHandle();
+    const newRefresh = await loginToken(newSession, {
+        url: url as string, 
+        kind: AccountKind.STUDENT,
+        token: token as string,
+        deviceUUID: deviceUUID as string,
+        username: username as string
+    });
+
+    localStorage.setItem("deviceuuid", deviceUUID!);
+    localStorage.setItem("token", newRefresh.token);
+    localStorage.setItem("instance", newRefresh.url);
+    localStorage.setItem("username", newRefresh.username);
+    return newSession
 }
