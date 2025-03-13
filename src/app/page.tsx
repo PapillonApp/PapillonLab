@@ -52,6 +52,16 @@ export default function Home() {
     console.log(pin, qrcode)
   }
 
+  const changeLoginMethod = (newMethod: "credentials" | "qrcode" | null) => {
+    setSelectedMethod(newMethod);
+    setPin(null);
+    setQRCode(null);
+    setLoading(false);
+    setError("");
+    setUsername("");
+    setPassword("");
+  }
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -68,7 +78,7 @@ export default function Home() {
 
             {selectedMethod === null && (
               <div className={styles.buttons}>
-                <Button centered onPress={() => setSelectedMethod("credentials")}>
+                <Button centered onPress={() => changeLoginMethod("credentials")}>
                   <p>Se connecter via mes identifiants</p>
                 </Button>
                 <Button
@@ -76,7 +86,7 @@ export default function Home() {
                   variant="secondary"
                   centered
                   onPress={() => {
-                    setSelectedMethod("qrcode");
+                    changeLoginMethod("qrcode");
                   }}
                 >
                   <p>Utiliser un QR-Code</p>
@@ -98,7 +108,7 @@ export default function Home() {
                     variant="secondary"
                     centered
                     onPress={() => {
-                      setSelectedMethod(null);
+                      changeLoginMethod(null);
                     }}
                   >
                     <p>Changer de méthode de connexion</p>
@@ -127,9 +137,7 @@ export default function Home() {
                     variant="secondary"
                     centered
                     onPress={() => {
-                      setSelectedMethod(null);
-                      setError("")
-                      setFileSubmitted(null);
+                      changeLoginMethod(null);
                     }}
                   >
                     <p>Changer de méthode de connexion</p>
@@ -155,9 +163,7 @@ export default function Home() {
                     variant="secondary"
                     centered
                     onPress={() => {
-                      setSelectedMethod(null);
-                      setError("")
-                      setFileSubmitted(null);
+                      changeLoginMethod(null);
                     }}
                   >
                     <p>Changer de méthode de connexion</p>
