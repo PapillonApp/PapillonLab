@@ -79,6 +79,21 @@
   gap: 16px;
 }
 
+.warnBox {
+  display: flex;
+  flex-direction: row;
+  color: #D10000;
+  font-family: "Fixel Text", sans-serif;
+  font-weight: 600;
+  background: #D1000030;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  align-items: center;
+  gap: 10px
+}
+
+
 @font-face {
   font-family: "Fixel Text";
   src: url("/fonts/FixelText-Regular.woff2") format("woff2");

@@ -5,7 +5,7 @@ interface ButtonProps {
     onPress?: () => void;
     children?: React.ReactNode;
     leading?: React.ReactNode;
-    variant?: "primary" | "secondary";
+    variant?: "primary" | "secondary" | "border";
     disabled?: boolean;
     centered?: boolean;
     withShadow?: boolean;
