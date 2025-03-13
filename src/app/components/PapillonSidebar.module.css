@@ -1,0 +1,13 @@
+.sidebar {
+    background-color: #F7FCFF;
+    min-height: 100svh;
+    border: 1px solid #CDCDCD;
+    display: flex;
+    width: fit-content;
+    min-width: 300px;
+    padding: 25px 15px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }

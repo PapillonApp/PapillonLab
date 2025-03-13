@@ -1,32 +1,12 @@
 .page {
-  display: flex;
-  flex-direction: row;
-  transition: transform 0.3s ease-in-out;
-  font-size: 17px;
-  color: #fff;
+  display: grid;
+  grid-template-rows: 20px 1fr 20px;
+  min-height: 100svh;
+  background-color: #FFFFFF;
+  font-family: var(--font-geist-sans);
 }
 
-.content {
-  flex: 1;
-  padding: 20px;
-}
-
-.sidebar {
-  width: 320px;
-  flex-shrink: 0;
-}
-
-.pages {
+.page .main {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-
-@media (prefers-color-scheme: dark) {
-  .page {
-      background-color: #000000;
   }
-}
-
-
