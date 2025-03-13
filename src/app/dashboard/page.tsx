@@ -7,12 +7,35 @@ import { Share, WandSparkles } from "lucide-react";
 
 export default function Dashboard() {
   const [expanded, setExpanded] = useState(true);
+  const [activeButton, setActiveButton] = useState<string | null>(null);
+
+  const handleExportClick = () => {
+    console.log("Exporter mes données en légende");
+    setActiveButton("export");
+  };
+
+  const handleMagicClick = () => {
+    console.log("Papillon Magic+ waaaouuu le futur");
+    setActiveButton("magic");
+  };
 
   return (
     <div className={`${styles.page} ${expanded ? styles.expanded : styles.collapsed}`}>
       <Sidebar onToggle={setExpanded}>
-        <Button variant="primary" leading={<Share absoluteStrokeWidth={true} size={20} />}>Exporter mes données</Button>
-        <Button variant="secondary" leading={<WandSparkles absoluteStrokeWidth={true} size={20} />}>Papillon Magic+</Button>
+        <Button
+          variant={activeButton === "export" ? "primary" : "secondary"}
+          leading={<Share absoluteStrokeWidth={true} size={20} />}
+          onPress={handleExportClick}
+        >
+          <p style={{ marginTop: 2 }}>Exporter mes données</p>
+        </Button>
+        <Button
+          variant={activeButton === "magic" ? "primary" : "secondary"}
+          leading={<WandSparkles absoluteStrokeWidth={true} size={20} />}
+          onPress={handleMagicClick}
+        >
+          <p style={{ marginTop: 2 }}>Papillon Magic+</p>
+        </Button>
       </Sidebar>
       <div className={styles.content}>
         <span>Dashboard</span>
