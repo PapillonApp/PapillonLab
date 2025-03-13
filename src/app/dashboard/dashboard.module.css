@@ -1,166 +1,24 @@
 .page {
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
-}
-
-.page .main {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
-}
-
-@media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-bottom: 80px;
-  }
-
-  .main {
-    align-items: center;
-  }
-}
-
-.stars {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.container {
-  display: flex;
-  padding: 28px 46px;
-  max-width: 670px;
-  background-color: #fff;
-  gap: 30px;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 22px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-.introText {
-  align-self: stretch;
-  color: #000;
-  text-align: center;
-  font-family: "Fixel Text", sans-serif;
-  font-size: 17px;
-  opacity: 0.55;
-  font-weight: 600;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 7px;
-}
-
-.subText {
-  align-self: stretch;
-  color: #000;
-  text-align: center;
-  font-family: "Fixel Text", sans-serif;
-  font-size: 14px;
-  opacity: 0.55;
-  font-weight: 500;
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 16px;
-}
-
-.warnBox {
   display: flex;
   flex-direction: row;
-  color: #D10000;
-  font-family: "Fixel Text", sans-serif;
-  font-weight: 600;
-  background: #D1000030;
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 16px;
-  align-items: center;
-  gap: 10px
+  transition: margin-left 0.3s ease-in-out;
 }
 
-
-@font-face {
-  font-family: "Fixel Text";
-  src: url("/fonts/FixelText-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
+.page.expanded {
+  margin-left: 250px;
 }
 
-@media (max-width: 500px) {
-  .stars {
-    visibility: hidden;
-  }
-  .page {
-    padding: 0;
-    height: 100vh;
-  }
-  .main {
-    padding: 0;
-  }
-  .container {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    padding: 28px 36px;
-  }
+.page.collapsed {
+  margin-left: 60px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
 }
 
 @media (prefers-color-scheme: dark) {
   .page {
-    background-color: #121212;
+      background-color: #000000;
   }
-
-  .container {
-    background-color: #1b1b1b;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .introText, .subText {
-    color: #ffffff;
-    opacity: 0.75;
-  }
-
-  .stars {
-    filter: invert(1) grayscale(1) contrast(100%) brightness(100%);
-  }
-
-  .buttons {
-    color: #ffffff;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.container {
-  animation: fadeIn 0.50s ease-in-out;
-  transition: height 0.3s ease-in-out;
 }
