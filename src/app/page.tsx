@@ -10,10 +10,13 @@ import PapillonLabsLogo from "./components/PapillonLabLogo";
 import PapillonInput from "./components/PapillonInput";
 import PapillonDropzone from "./components/PapillonDropzone";
 import { scanQRCodeFromFile, validateQRCode } from "./utils/ScanQR";
+import { useRouter } from 'next/navigation'
 import PapillonQRPin from "./components/PapillonQRPin";
 import { loginWithCredentials, loginWithQR } from "./utils/Authentication";
 
 export default function Home() {
+  const router = useRouter()
+
   const [selectedMethod, setSelectedMethod] = useState<"credentials" | "qrcode" | null>(null);
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
@@ -43,6 +46,7 @@ export default function Home() {
     try {
       await loginWithCredentials(instance, username, password)
       setLoading(false)
+      router.push("/dashboard");
     } catch (error) {
       console.error(error)
       setLoading(false)
@@ -67,6 +71,7 @@ export default function Home() {
       try {
         await loginWithQR(pin, qrcode);
         setLoading(false);
+        router.push("/dashboard");
       } catch (error) {
         console.error(error)
         setLoading(false);
