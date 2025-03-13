@@ -7,8 +7,6 @@
     left: 0;
     background-color: #F7FCFF;
     border: 1px solid #CDCDCD;
-    overflow-x: hidden;
-    padding-top: 20px;
     padding: 25px;
     flex-direction: column;
     display: flex;

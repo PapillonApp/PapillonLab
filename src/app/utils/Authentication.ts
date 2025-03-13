@@ -29,6 +29,9 @@ export async function loginWithQR(pin: string, dataFromQR: string): Promise<Refr
         localStorage.setItem("instance", refresh.url);
         localStorage.setItem("username", refresh.username);
         localStorage.setItem("name", session.user.name);
+        if (session.userResource.className) {
+            localStorage.setItem("classname", session.userResource.className);
+        }
         if (session.userResource.profilePicture) {
             const response = await fetch(session.userResource.profilePicture.url);
             const blob = await response.blob();
@@ -67,6 +70,9 @@ export async function loginWithCredentials(url: string, username: string, passwo
     localStorage.setItem("instance", url);
     localStorage.setItem("username", username);
     localStorage.setItem("name", session.user.name);
+    if (session.userResource.className) {
+        localStorage.setItem("classname", session.userResource.className);
+    }
     if (session.userResource.profilePicture) {
         const response = await fetch(session.userResource.profilePicture.url);
         const blob = await response.blob();

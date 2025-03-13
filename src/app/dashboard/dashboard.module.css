@@ -12,8 +12,17 @@
   padding: 20px;
 }
 
+.pages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
 @media (prefers-color-scheme: dark) {
   .page {
       background-color: #000000;
   }
 }
+
+

@@ -6,6 +6,7 @@ interface ButtonProps {
     onPress?: () => void;
     children?: React.ReactNode;
     leading?: React.ReactNode;
+    trailing?: React.ReactNode;
     variant?: "primary" | "secondary" | "border";
     disabled?: boolean;
     centered?: boolean;
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
     onPress,
     children,
     leading,
+    trailing,
     variant = "primary",
     disabled = false,
     centered = false,
@@ -28,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
             {leading && !loading && <span style={{display: "flex"}}>{leading}</span>}
             {loading && <span className={styles.loadingSpinner}><Loader size={24} /></span>}
             {children}
+            {trailing && <span style={{display: "flex"}}>{trailing}</span>}
         </button>
     )
 }
