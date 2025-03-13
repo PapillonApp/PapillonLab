@@ -32,6 +32,7 @@ export default function Dashboard() {
 
     return (
         <div className={styles.page}>
+            <div className={styles.sidebar}>
             <Sidebar>
                 <div>
                     <PapillonLabsLogo width={200} />
@@ -72,6 +73,7 @@ export default function Dashboard() {
                     </Button>
                 </div>
             </Sidebar>
+            </div>
 
             <div className={styles.content}>
                 <span>Dashboard</span>

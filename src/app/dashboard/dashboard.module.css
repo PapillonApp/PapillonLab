@@ -1,15 +1,19 @@
 .page {
   display: flex;
   flex-direction: row;
-  transition: margin-left 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   font-size: 17px;
   color: #fff;
-  margin-left: 320px;
 }
 
 .content {
   flex: 1;
   padding: 20px;
+}
+
+.sidebar {
+  width: 320px;
+  flex-shrink: 0;
 }
 
 .pages {
