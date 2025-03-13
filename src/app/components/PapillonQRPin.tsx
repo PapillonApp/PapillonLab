@@ -5,12 +5,14 @@ interface PapillonQRPinProps {
     onSubmit?: (pin: string) => void;
     onChange?: (pin: string) => void;
     numberOfCase?: number;
+    disabled?: boolean;
 }
 
 const PapillonQRPin: React.FC<PapillonQRPinProps> = ({
     onSubmit = () => {},
     onChange = () => {},
-    numberOfCase = 4
+    numberOfCase = 4,
+    disabled = false
 }) => {
     const inputsRef = useRef<HTMLInputElement[]>([]);
 
@@ -54,6 +56,7 @@ const PapillonQRPin: React.FC<PapillonQRPinProps> = ({
                     }}
                     onInput={(e) => handleInput(e as React.ChangeEvent<HTMLInputElement>, index)}
                     onKeyDown={(e) => handleKeyDown(e, index)}
+                    disabled={disabled}
                 />
             ))}
         </div>

@@ -11,11 +11,13 @@ import PapillonInput from "./components/PapillonInput";
 import PapillonDropzone from "./components/PapillonDropzone";
 import { scanQRCodeFromFile, validateQRCode } from "./utils/ScanQR";
 import PapillonQRPin from "./components/PapillonQRPin";
+import { loginWithCredentials, loginWithQR } from "./utils/Authentication";
 
 export default function Home() {
   const [selectedMethod, setSelectedMethod] = useState<"credentials" | "qrcode" | null>(null);
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const [instance, setInstance] = useState<string>("")
 
   const [error, setError] = useState<string>("")
   const [fileSubmitted, setFileSubmitted] = useState<File | null>(null)
@@ -23,6 +25,10 @@ export default function Home() {
   const [pin, setPin] = useState<string | null>(null)
   const [qrcode, setQRCode] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
+
+  const handleInstanceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInstance(event.target.value)
+  };
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value)
@@ -32,8 +38,16 @@ export default function Home() {
     setPassword(event.target.value)
   };
 
-  const handleLoginWithCredentials = () => {
-    console.log(username, password)
+  const handleLoginWithCredentials = async () => {
+    setLoading(true);
+    try {
+      await loginWithCredentials(instance, username, password)
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
+      setLoading(false)
+      setError("Une erreur est survenu pendant la connexion.")
+    }
   };
 
   const verifyQRCode = async () => {
@@ -49,7 +63,16 @@ export default function Home() {
 
   const handleLoginWithQR = async (pin: string) => {
     setLoading(true)
-    console.log(pin, qrcode)
+    if (qrcode) {
+      try {
+        await loginWithQR(pin, qrcode);
+        setLoading(false);
+      } catch (error) {
+        console.error(error)
+        setLoading(false);
+        setError("Une erreur est survenu pendant la connexion.")
+      }
+    }
   }
 
   const changeLoginMethod = (newMethod: "credentials" | "qrcode" | null) => {
@@ -96,12 +119,19 @@ export default function Home() {
 
             {selectedMethod === "credentials" && (
               <>
+                {error && (
+                <div className={styles.warnBox}>
+                    <X />
+                    <span>{error}</span>
+                  </div>
+                )}
                 <div className={styles.inputContainer}>
+                  <PapillonInput placeholder="Instance PRONOTE" onChange={handleInstanceChange} value={instance}/>
                   <PapillonInput placeholder="Identifiant" onChange={handleUsernameChange} value={username}/>
                   <PapillonInput placeholder="Mot de passe" type="password" onChange={handlePasswordChange} value={password} onSubmit={handleLoginWithCredentials}/>
                 </div>
                 <div className={styles.buttons}>
-                  <Button centered onPress={handleLoginWithCredentials}>
+                  <Button centered onPress={handleLoginWithCredentials} loading={loading}>
                     <p>Se connecter via mes identifiants</p>
                   </Button>
                   <Button
@@ -119,7 +149,7 @@ export default function Home() {
 
             {selectedMethod === "qrcode" && !qrcode && (
               <>
-              {error && (
+                {error && (
                 <div className={styles.warnBox}>
                     <X />
                     <span>{error}</span>
@@ -154,7 +184,7 @@ export default function Home() {
                     <span>{error}</span>
                   </div>
                 )}
-                <PapillonQRPin onChange={(pin) => setPin(pin)} onSubmit={(pin) => handleLoginWithQR(pin)}/>
+                <PapillonQRPin onChange={(pin) => setPin(pin)} onSubmit={(pin) => handleLoginWithQR(pin)} disabled={loading}/>
                 <div className={styles.buttons}>
                   <Button centered onPress={() => pin ? handleLoginWithQR(pin) : {}} loading={loading}>
                     <p>Se connecter via mon QRCode</p>
