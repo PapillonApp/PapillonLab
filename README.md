@@ -1,1 +1,1 @@
-![Papillon Labs](https://raw.githubusercontent.com/raphckrman/PapillonLabs/main/.github/assets/banner.svg)
+![Papillon Labs](https://raw.githubusercontent.com/raphckrman/PapillonLab/refs/heads/rework-ui/.github/assets/banner.svg?token=GHSAT0AAAAAAC35QUUUWDQLXNC425Q4EVBGZ6TKPPQ)
