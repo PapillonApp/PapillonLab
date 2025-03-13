@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Stars from "../../public/assets/stars.svg";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import PapillonDropzone from "./components/PapillonDropzone";
 import { scanQRCodeFromFile, validateQRCode } from "./utils/ScanQR";
 import { useRouter } from 'next/navigation'
 import PapillonQRPin from "./components/PapillonQRPin";
-import { loginWithCredentials, loginWithQR } from "./utils/Authentication";
+import { loginWithCredentials, loginWithQR, refreshSession } from "./utils/Authentication";
 
 export default function Home() {
   const router = useRouter()
@@ -40,6 +40,24 @@ export default function Home() {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value)
   };
+
+  const fetchdata = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        await refreshSession();
+        console.log("Logged in")
+        router.push("/dashboard")
+      } catch (error) {
+        console.error("Failed to refresh session", error);
+      }
+      console.log("Already logged in")
+    }
+  }
+
+  useEffect(() => {
+    fetchdata()
+  }, [])
 
   const handleLoginWithCredentials = async () => {
     setLoading(true);
