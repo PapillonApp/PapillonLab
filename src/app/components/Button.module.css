@@ -85,3 +85,21 @@
         color: #a9a9a9;
     }
 }
+
+.loadingSpinner {
+    text-align: center;
+    justify-content: center;
+    transform-origin: center;
+    height: 24px;
+    width: 24px;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}

@@ -1,0 +1,56 @@
+.inputContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin: 10px;
+}
+
+.pinInput {
+    display: flex;
+    padding: 18px 25px;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 17px;
+    border: 1px solid #DBDBDB;
+    background: #F6F6F6;
+    font-family: "Fixel Text", sans-serif;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 1000;
+    line-height: normal;
+    color: black;
+    width: 70px;
+    text-align: center;
+    align-items: center;
+}
+
+.pinInput:focus {
+    outline: 2px solid #004F89;
+    outline-offset: 2px;
+    box-shadow: 0 0 8px rgba(0, 79, 137, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+    .pinInput {
+        background: #121212;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+
+    .pinInput:focus {
+        outline: 2px solid #FFFFFF;
+        outline-offset: 2px;
+        box-shadow: 0 0 8px rgba(0, 79, 137, 0.5);
+    }
+}
+
+.pinInput::-webkit-outer-spin-button,
+.pinInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.pinInput[type=number] {
+    -moz-appearance:textfield;
+}

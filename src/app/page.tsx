@@ -9,6 +9,8 @@ import { QrCode, X } from "lucide-react";
 import PapillonLabsLogo from "./components/PapillonLabLogo";
 import PapillonInput from "./components/PapillonInput";
 import PapillonDropzone from "./components/PapillonDropzone";
+import { scanQRCodeFromFile, validateQRCode } from "./utils/ScanQR";
+import PapillonQRPin from "./components/PapillonQRPin";
 
 export default function Home() {
   const [selectedMethod, setSelectedMethod] = useState<"credentials" | "qrcode" | null>(null);
@@ -17,6 +19,10 @@ export default function Home() {
 
   const [error, setError] = useState<string>("")
   const [fileSubmitted, setFileSubmitted] = useState<File | null>(null)
+
+  const [pin, setPin] = useState<string | null>(null)
+  const [qrcode, setQRCode] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value)
@@ -29,6 +35,23 @@ export default function Home() {
   const handleLoginWithCredentials = () => {
     console.log(username, password)
   };
+
+  const verifyQRCode = async () => {
+    if (fileSubmitted) {
+      const data = await scanQRCodeFromFile(fileSubmitted)
+      if (data && validateQRCode(data)) {
+        setQRCode(data)
+      } else {
+        setError("Votre QRCode n'est pas valide.")
+      }
+    }
+  }
+
+  const handleLoginWithQR = async (pin: string) => {
+    setLoading(true)
+    console.log(pin, qrcode)
+  }
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -84,7 +107,7 @@ export default function Home() {
               </>
             )}
 
-            {selectedMethod === "qrcode" && (
+            {selectedMethod === "qrcode" && !qrcode && (
               <>
               {error && (
                 <div className={styles.warnBox}>
@@ -97,7 +120,35 @@ export default function Home() {
                   onFileSubmitted={(file) => { setFileSubmitted(file) }}
                 />
                 <div className={styles.buttons}>
-                  <Button centered onPress={handleLoginWithCredentials} disabled={fileSubmitted ? false : true}>
+                  <Button centered onPress={() => verifyQRCode()} disabled={fileSubmitted ? false : true}>
+                    <p>Se connecter via mon QRCode</p>
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    centered
+                    onPress={() => {
+                      setSelectedMethod(null);
+                      setError("")
+                      setFileSubmitted(null);
+                    }}
+                  >
+                    <p>Changer de méthode de connexion</p>
+                  </Button>
+                </div>
+              </>
+            )}
+
+            {selectedMethod === "qrcode" && qrcode && (
+              <>
+              {error && (
+                <div className={styles.warnBox}>
+                    <X />
+                    <span>{error}</span>
+                  </div>
+                )}
+                <PapillonQRPin onChange={(pin) => setPin(pin)} onSubmit={(pin) => handleLoginWithQR(pin)}/>
+                <div className={styles.buttons}>
+                  <Button centered onPress={() => pin ? handleLoginWithQR(pin) : {}} loading={loading}>
                     <p>Se connecter via mon QRCode</p>
                   </Button>
                   <Button
