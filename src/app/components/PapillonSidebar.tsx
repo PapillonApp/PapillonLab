@@ -9,17 +9,21 @@ interface PapillonSidebarTabs {
 }
 
 interface PapillonSidebarProps {
+    onChange?: (newTab: number) => void;
     header?: React.ReactNode
     tabs: Array<PapillonSidebarTabs>;
     footer?: React.ReactNode
 }
 
-const PapillonSidebar: React.FC<PapillonSidebarProps> = ({ header, tabs, footer }) => {
+const PapillonSidebar: React.FC<PapillonSidebarProps> = ({ onChange, header, tabs, footer }) => {
     const [activeTab, setActiveTab] =  useState<number>(0)
 
     const handleTabPress = (index: number) => {
         if (activeTab !== index) {
             setActiveTab(index)
+            if (onChange) {
+                onChange(index)
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 "use client";
-import { Share, WandSparkles } from "lucide-react";
+import { Share, User, WandSparkles, Image as ImageIcon, Calendar, ChartPie, School, MoreHorizontal } from "lucide-react";
 import styles from "./dashboard.module.css";
 import { useState, useEffect } from "react";
 import PapillonSidebar from "../components/PapillonSidebar";
@@ -7,8 +7,10 @@ import PapillonLabsLogo from "../components/PapillonLabLogo";
 import Image from "next/image";
 import Button from "../components/Button";
 import { ClassName } from "../components/ClassName";
+import ExportData from "../components/ExportData";
 
 export default function Dashboard() {
+    const [activeTab, setActiveTab] =  useState<number>(0)
     const [profilePic, setProfilePic] = useState<string>("/defaultProfilePic.jpg");
     const [name, setName] = useState<string>("");
 
@@ -23,6 +25,7 @@ export default function Dashboard() {
         <div className={styles.page}>
             <main className={styles.main}>
                 <PapillonSidebar 
+                    onChange={setActiveTab}
                     header={<PapillonLabsLogo />}
                     tabs={[{
                         label: "Exporter mes données",
@@ -50,6 +53,36 @@ export default function Dashboard() {
                         </Button>
                     }
                 />
+                 <div style={{width: "100%", minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    {activeTab == 0 && (
+                        <ExportData collectedDatas={[
+                            {
+                                label: "Ton nom, prénom et classe",
+                                icon: User
+                            },
+                            {
+                                label: "Ta photo de classe",
+                                icon: ImageIcon
+                            },
+                            {
+                                label: "Ton emploi du temps",
+                                icon: Calendar
+                            },
+                            {
+                                label: "Tes notes et moyennes",
+                                icon: ChartPie
+                            },
+                            {
+                                label: "Tes absences et retards",
+                                icon: School
+                            },
+                            {
+                                label: "Données diverses",
+                                icon: MoreHorizontal
+                            },
+                        ]} />
+                    )}
+                </div>
             </main>
         </div>
     );

@@ -1,0 +1,30 @@
+.title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #004F89;
+    font-family: "Fixel Text";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.subtitle {
+    align-self: stretch;
+    color: #000;
+    font-family: "Fixel Text";
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    opacity: 0.55;
+}
+
+.datasContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 5px;
+}
