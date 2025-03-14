@@ -8,16 +8,19 @@ import Image from "next/image";
 import Button from "../components/Button";
 import { ClassName } from "../components/ClassName";
 import ExportData from "../components/ExportData";
+import defaultProfilePicture from "../../../public/assets/defaultProfilePicture.jpg"
 
 export default function Dashboard() {
     const [activeTab, setActiveTab] =  useState<number>(0)
-    const [profilePic, setProfilePic] = useState<string>("/defaultProfilePic.jpg");
+    const [profilePic, setProfilePic] = useState<string>(defaultProfilePicture.src);
     const [name, setName] = useState<string>("");
+    const [classname, setClassname] = useState<string | null>(null);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            setProfilePic(localStorage.getItem("profilePicture") || "/defaultProfilePic.jpg");
+            setProfilePic(localStorage.getItem("profilePicture") || defaultProfilePicture.src);
             setName(localStorage.getItem("name") || "");
+            setClassname(localStorage.getItem("classname"));
         }
     }, []);
     
@@ -47,8 +50,8 @@ export default function Dashboard() {
                                 />
                             }
                             trailing={
-                                localStorage.getItem("classname") ? <ClassName text={localStorage.getItem("classname") || ""} /> : null}
-                            >
+                                classname ? <ClassName text={classname} /> : null
+                            }>
                             <p style={{ marginTop: 2 }}>{name}</p>
                         </Button>
                     }
