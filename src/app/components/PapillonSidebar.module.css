@@ -1,7 +1,7 @@
 .sidebar {
     background-color: #F7FCFF;
     min-height: 100svh;
-    border: 1px solid #CDCDCD;
+    border-right: 1px solid #CDCDCD;
     display: flex;
     width: fit-content;
     min-width: 300px;
@@ -11,3 +11,10 @@
     align-items: flex-start;
     flex-shrink: 0;
   }
+
+@media (prefers-color-scheme: dark) {
+    .sidebar {
+        background-color: #1b1b1b;
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}

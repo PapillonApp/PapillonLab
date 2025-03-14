@@ -28,3 +28,13 @@
     gap: 10px;
     padding-top: 5px;
 }
+
+@media (prefers-color-scheme: dark) {
+    .title {
+        color: #FFF;
+    }
+    
+    .subtitle {
+        color: #FFF
+    }
+}

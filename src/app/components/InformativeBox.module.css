@@ -22,3 +22,15 @@
     border-radius: 24px;
     background: #EBEBEB;
 }
+
+@media (prefers-color-scheme: dark) {
+    .informativeBox {
+        background-color: #262626;
+        color: #a1a1a1;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .iconContainer {
+        background: #1b1b1b;
+    }
+}

@@ -1,0 +1,23 @@
+.container {
+    background-color: #006DB929;
+    border-radius: 8;
+    padding: 4px 6px;
+    overflow: hidden;
+}
+
+.text {
+    color: #006DB9;
+    font-size: 16;
+    letter-spacing: 0.5;
+    margin: 0;
+    margin-bottom: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: #FFFFFF15;
+    }
+    .text {
+        color: #FFF;
+    }
+}
