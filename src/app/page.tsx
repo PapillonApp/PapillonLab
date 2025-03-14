@@ -41,23 +41,16 @@ export default function Home() {
     setPassword(event.target.value)
   };
 
-  const fetchdata = async () => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      try {
-        await refreshSession();
-        console.log("Logged in")
-        router.push("/dashboard")
-      } catch (error) {
+      router.push("/dashboard");
+  
+      refreshSession().catch((error) => {
         console.error("Failed to refresh session", error);
-      }
-      console.log("Already logged in")
+      });
     }
-  }
-
-  useEffect(() => {
-    fetchdata()
-  }, [])
+  }, [router]);
 
   const handleLoginWithCredentials = async () => {
     setLoading(true);
