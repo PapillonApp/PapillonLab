@@ -1,7 +1,7 @@
 import Button from "./Button";
 import PapillonLabsLogo from "./PapillonLabLogo";
 import styles from "./PapillonSidebar.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ClassName } from "./ClassName";
 
@@ -22,8 +22,25 @@ interface PapillonSidebarProps {
 
 const PapillonSidebar: React.FC<PapillonSidebarProps> = ({ onChange, tabs, profilePic, name, classname }) => {
     const [activeTab, setActiveTab] = useState<number>(0);
-    const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+    const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
     const [cursor, setCursor] = useState<string>('default');
+
+    useEffect(() => {
+        const checkScreenWidth = () => {
+            if (window.innerWidth < 500) {
+                setIsCollapsed(true);
+            } else {
+                setIsCollapsed(false);
+            }
+        };
+
+        checkScreenWidth();
+        window.addEventListener("resize", checkScreenWidth);
+
+        return () => {
+            window.removeEventListener("resize", checkScreenWidth);
+        };
+    }, []);
 
     const handleTabPress = (index: number) => {
         if (activeTab !== index) {
@@ -78,12 +95,7 @@ const PapillonSidebar: React.FC<PapillonSidebarProps> = ({ onChange, tabs, profi
         >
             <PapillonLabsLogo collapsed={isCollapsed}/>
             <div
-                style={{
-                    width: isCollapsed ? 'auto' : '100%',
-                    gap: "10px",
-                    display: "flex",
-                    flexDirection: "column"
-                }}
+                className={styles.tabsContainer}
             >
                 {tabs.map((tab, index) => (
                     <Button key={index} leading={tab.leading} trailing={tab.trailing} variant={activeTab === index ? "primary" : "secondary"} onPress={() => handleTabPress(index)} collapsed={isCollapsed} disabled={tab.disabled}>
@@ -95,6 +107,7 @@ const PapillonSidebar: React.FC<PapillonSidebarProps> = ({ onChange, tabs, profi
                 variant="secondary" 
                 onPress={() => console.log("Logout")}
                 collapsed={isCollapsed}
+                withPadding={false}
                 leading={
                     <Image
                         src={profilePic}

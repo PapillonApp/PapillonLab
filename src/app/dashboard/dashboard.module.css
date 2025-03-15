@@ -9,10 +9,30 @@
 .page .main {
   display: flex;
   flex-direction: row;
-  }
+}
+
+.tabContainer {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25%;
+}
 
 @media (prefers-color-scheme: dark) {
   .page {
       background-color: #141414;
+  }
+}
+
+@media (max-width: 500px) {
+  .page .main {
+    flex-direction: column;
+  }
+
+  .tabContainer {
+    padding: 5%;
+    min-height: 90svh;
   }
 }

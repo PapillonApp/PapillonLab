@@ -23,3 +23,25 @@
     min-width: 0px;
     align-items: center;
 }
+
+.tabsContainer {
+    width: 100%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 500px) {
+    .sidebar {
+        flex-direction: row;
+        min-height: 0px;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #CDCDCD;
+        padding: 10px 25px;
+    }
+    .tabsContainer {
+        flex-direction: row;
+        width: auto;
+    }
+}

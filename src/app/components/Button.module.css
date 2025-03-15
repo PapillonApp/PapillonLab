@@ -92,7 +92,11 @@
 }
 
 .collapsed {
-    width: fit-content;    
+    width: fit-content;
+}
+
+.noPadding {
+    padding: 0;
 }
 
 .loadingSpinner {

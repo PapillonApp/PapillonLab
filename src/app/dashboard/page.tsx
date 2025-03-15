@@ -63,7 +63,7 @@ export default function Dashboard() {
                     name={name}
                     classname={classname || ""}
                 />
-                 <div style={{width: "100%", minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center", padding: "25%"}}>
+                 <div className={styles.tabContainer}>
                     {activeTab == 0 && (
                         <ExportData collectedDatas={[
                             {

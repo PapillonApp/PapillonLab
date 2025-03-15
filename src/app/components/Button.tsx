@@ -11,6 +11,7 @@ interface ButtonProps {
     disabled?: boolean;
     centered?: boolean;
     withShadow?: boolean;
+    withPadding?: boolean;
     loading?: boolean;
     collapsed?: boolean;
 }
@@ -25,10 +26,11 @@ const Button: React.FC<ButtonProps> = ({
     centered = false,
     withShadow = false,
     loading = false,
-    collapsed = false
+    collapsed = false,
+    withPadding = true
 }) => {
     return (
-        <button className={`${styles.button} ${styles[variant]} ${centered ? styles.centered : ""} ${disabled ? styles.disabled : loading ? styles.disabled : ""} ${withShadow ? styles.shadow : ""} ${collapsed ? styles.collapsed : ""}`} onClick={onPress} disabled={disabled || loading}>
+        <button className={`${styles.button} ${styles[variant]} ${centered ? styles.centered : ""} ${disabled ? styles.disabled : loading ? styles.disabled : ""} ${withShadow ? styles.shadow : ""} ${collapsed ? styles.collapsed : ""} ${withPadding ? "" : styles.noPadding}`} onClick={onPress} disabled={disabled || loading}>
             {leading && !loading && <span style={{display: "flex"}}>{leading}</span>}
             {loading && <span className={styles.loadingSpinner}><Loader size={24} /></span>}
             {!collapsed && children}
