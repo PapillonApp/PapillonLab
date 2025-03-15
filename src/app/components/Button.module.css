@@ -84,6 +84,11 @@
     .border {
         color: #a9a9a9;
     }
+    
+    .disabled {
+        color: #FFFFFF40;
+        background-color: transparent;
+    }
 }
 
 .collapsed {

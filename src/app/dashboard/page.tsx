@@ -23,6 +23,10 @@ export default function Dashboard() {
                 setName(localStorage.getItem("name") || "");
                 setClassname(localStorage.getItem("classname"));
             }
+
+            if (!localStorage.getItem("token")) {
+                router.push("/");
+            }
             
             if (localStorage.getItem("lastLogin")) {
                 if (Date.now() - parseInt(localStorage.getItem("lastLogin") as string) > 120000) {
@@ -52,7 +56,8 @@ export default function Dashboard() {
                     },
                     {
                         label: "Papillon Magic+",
-                        leading: <WandSparkles absoluteStrokeWidth={true} size={20} />
+                        leading: <WandSparkles absoluteStrokeWidth={true} size={20} />,
+                        disabled: true
                     }]}
                     profilePic={profilePic}
                     name={name}

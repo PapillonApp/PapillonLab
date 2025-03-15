@@ -9,6 +9,7 @@ interface PapillonSidebarTabs {
     label: string;
     leading?: React.ReactNode;
     trailing?: React.ReactNode;
+    disabled?: boolean;
 }
 
 interface PapillonSidebarProps {
@@ -85,7 +86,7 @@ const PapillonSidebar: React.FC<PapillonSidebarProps> = ({ onChange, tabs, profi
                 }}
             >
                 {tabs.map((tab, index) => (
-                    <Button key={index} leading={tab.leading} trailing={tab.trailing} variant={activeTab === index ? "primary" : "secondary"} onPress={() => handleTabPress(index)} collapsed={isCollapsed}>
+                    <Button key={index} leading={tab.leading} trailing={tab.trailing} variant={activeTab === index ? "primary" : "secondary"} onPress={() => handleTabPress(index)} collapsed={isCollapsed} disabled={tab.disabled}>
                         {tab.label}
                     </Button>
                 ))}
