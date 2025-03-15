@@ -113,6 +113,7 @@ export async function refreshSession(): Promise<SessionHandle> {
         return newSession
     } catch (error) {
         console.error(error)
+        localStorage.clear();
         throw new Error("Refreshing Failed")
     }   
 }
