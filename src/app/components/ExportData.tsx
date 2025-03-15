@@ -14,7 +14,7 @@ interface ExportDataProps {
 
 const ExportData: React.FC<ExportDataProps> = ({ collectedDatas }) => {
     return (
-        <div style={{display: "flex", flexDirection: "column", gap: 10, maxWidth: "40%"}}>
+        <div style={{display: "flex", flexDirection: "column", gap: 10}}>
             <div className={styles.title}>
                 <Share />
                 Exporter mes données

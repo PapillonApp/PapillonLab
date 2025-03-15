@@ -1,7 +1,7 @@
 .button {
     cursor: pointer;
     border: none;
-    padding: 12px 14px;
+    padding: 12px 12px;
     border-radius: 44px;
     display: flex;
     gap: 10;
@@ -84,6 +84,10 @@
     .border {
         color: #a9a9a9;
     }
+}
+
+.collapsed {
+    width: fit-content;    
 }
 
 .loadingSpinner {

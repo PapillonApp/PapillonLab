@@ -29,6 +29,7 @@ export async function loginWithQR(pin: string, dataFromQR: string): Promise<Refr
         localStorage.setItem("instance", refresh.url);
         localStorage.setItem("username", refresh.username);
         localStorage.setItem("name", session.user.name);
+        localStorage.setItem("lastLogin", Date.now().toString());
         if (session.userResource.className) {
             localStorage.setItem("classname", session.userResource.className);
         }
@@ -70,6 +71,7 @@ export async function loginWithCredentials(url: string, username: string, passwo
     localStorage.setItem("instance", url);
     localStorage.setItem("username", username);
     localStorage.setItem("name", session.user.name);
+    localStorage.setItem("lastLogin", Date.now().toString());
     if (session.userResource.className) {
         localStorage.setItem("classname", session.userResource.className);
     }
@@ -92,19 +94,25 @@ export async function refreshSession(): Promise<SessionHandle> {
     const token = localStorage.getItem("token");
     const url = localStorage.getItem("instance");
     const username = localStorage.getItem("username");
-
     const newSession = await createSessionHandle();
-    const newRefresh = await loginToken(newSession, {
-        url: url as string, 
-        kind: AccountKind.STUDENT,
-        token: token as string,
-        deviceUUID: deviceUUID as string,
-        username: username as string
-    });
 
-    localStorage.setItem("deviceuuid", deviceUUID!);
-    localStorage.setItem("token", newRefresh.token);
-    localStorage.setItem("instance", newRefresh.url);
-    localStorage.setItem("username", newRefresh.username);
-    return newSession
+    try {
+        const newRefresh = await loginToken(newSession, {
+            url: url as string, 
+            kind: AccountKind.STUDENT,
+            token: token as string,
+            deviceUUID: deviceUUID as string,
+            username: username as string
+        });
+    
+        localStorage.setItem("deviceuuid", deviceUUID!);
+        localStorage.setItem("token", newRefresh.token);
+        localStorage.setItem("instance", newRefresh.url);
+        localStorage.setItem("username", newRefresh.username);
+        localStorage.setItem("lastLogin", Date.now().toString());
+        return newSession
+    } catch (error) {
+        console.error(error)
+        throw new Error("Refreshing Failed")
+    }   
 }

@@ -3,12 +3,10 @@ import { Share, User, WandSparkles, Image as ImageIcon, Calendar, ChartPie, Scho
 import styles from "./dashboard.module.css";
 import { useState, useEffect } from "react";
 import PapillonSidebar from "../components/PapillonSidebar";
-import PapillonLabsLogo from "../components/PapillonLabLogo";
-import Image from "next/image";
-import Button from "../components/Button";
-import { ClassName } from "../components/ClassName";
 import ExportData from "../components/ExportData";
 import defaultProfilePicture from "../../../public/assets/defaultProfilePicture.jpg"
+import { useRouter } from "next/navigation";
+import { refreshSession } from "../utils/Authentication";
 
 export default function Dashboard() {
     const [activeTab, setActiveTab] =  useState<number>(0)
@@ -16,20 +14,38 @@ export default function Dashboard() {
     const [name, setName] = useState<string>("");
     const [classname, setClassname] = useState<string | null>(null);
 
+    const router = useRouter()
+    
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            setProfilePic(localStorage.getItem("profilePicture") || defaultProfilePicture.src);
-            setName(localStorage.getItem("name") || "");
-            setClassname(localStorage.getItem("classname"));
-        }
-    }, []);
+        const fetchSession = async () => {
+            if (typeof window !== "undefined") {
+                setProfilePic(localStorage.getItem("profilePicture") || defaultProfilePicture.src);
+                setName(localStorage.getItem("name") || "");
+                setClassname(localStorage.getItem("classname"));
+            }
+            
+            if (localStorage.getItem("lastLogin")) {
+                if (Date.now() - parseInt(localStorage.getItem("lastLogin") as string) > 120000) {
+                    try {
+                        const session = await refreshSession();
+                        console.log(session)
+                    } catch (error) {
+                        console.log(error)
+                        router.push("/");
+                    }
+                }
+            }
+        };
+    
+        fetchSession();
+    }, [router]);
+    
     
     return (
         <div className={styles.page}>
             <main className={styles.main}>
                 <PapillonSidebar 
                     onChange={setActiveTab}
-                    header={<PapillonLabsLogo />}
                     tabs={[{
                         label: "Exporter mes données",
                         leading: <Share absoluteStrokeWidth={true} size={20} />
@@ -38,25 +54,11 @@ export default function Dashboard() {
                         label: "Papillon Magic+",
                         leading: <WandSparkles absoluteStrokeWidth={true} size={20} />
                     }]}
-                    footer={
-                        <Button variant="secondary" onPress={() => console.log("Logout")}
-                            leading={
-                                <Image
-                                    src={profilePic}
-                                    alt="Profile Picture"
-                                    width={35}
-                                    height={35}
-                                    style={{ objectFit: "cover", borderRadius: "50%", marginRight: 8 }}
-                                />
-                            }
-                            trailing={
-                                classname ? <ClassName text={classname} /> : null
-                            }>
-                            <p style={{ marginTop: 2 }}>{name}</p>
-                        </Button>
-                    }
+                    profilePic={profilePic}
+                    name={name}
+                    classname={classname || ""}
                 />
-                 <div style={{width: "100%", minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                 <div style={{width: "100%", minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center", padding: "25%"}}>
                     {activeTab == 0 && (
                         <ExportData collectedDatas={[
                             {

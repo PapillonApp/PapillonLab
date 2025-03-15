@@ -12,6 +12,7 @@ interface ButtonProps {
     centered?: boolean;
     withShadow?: boolean;
     loading?: boolean;
+    collapsed?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,13 +24,14 @@ const Button: React.FC<ButtonProps> = ({
     disabled = false,
     centered = false,
     withShadow = false,
-    loading = false
+    loading = false,
+    collapsed = false
 }) => {
     return (
-        <button className={`${styles.button} ${styles[variant]} ${centered ? styles.centered : ""} ${disabled ? styles.disabled : loading ? styles.disabled : ""} ${withShadow ? styles.shadow : ""}`} onClick={onPress} disabled={disabled || loading}>
+        <button className={`${styles.button} ${styles[variant]} ${centered ? styles.centered : ""} ${disabled ? styles.disabled : loading ? styles.disabled : ""} ${withShadow ? styles.shadow : ""} ${collapsed ? styles.collapsed : ""}`} onClick={onPress} disabled={disabled || loading}>
             {leading && !loading && <span style={{display: "flex"}}>{leading}</span>}
             {loading && <span className={styles.loadingSpinner}><Loader size={24} /></span>}
-            {children}
+            {!collapsed && children}
             {trailing && <span style={{display: "flex"}}>{trailing}</span>}
         </button>
     )

@@ -10,11 +10,16 @@
     justify-content: space-between;
     align-items: flex-start;
     flex-shrink: 0;
-  }
+}
 
 @media (prefers-color-scheme: dark) {
     .sidebar {
         background-color: #1b1b1b;
         border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
+}
+
+.collapsed {
+    min-width: 0px;
+    align-items: center;
 }
