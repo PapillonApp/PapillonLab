@@ -53,3 +53,35 @@
 .activeStepTitle {
     color: #004F89;
 }
+
+@media (prefers-color-scheme: dark) {
+    .stepCircle {
+        background-color: #737373;
+        color: #EBEBEB;
+    }
+
+    .stepLine {
+        background-color: #737373;
+    }
+
+    .activeCircle {
+        background-color: #ffffff;
+        color: black;
+    }
+
+    .inProgressStepLine {
+        background: linear-gradient(180deg, #ffffff 0%, #737373 90%);
+    }
+
+    .activeStepLine {
+        background-color: #ffffff;
+    }
+
+    .stepTitle {
+        color: #EBEBEB;
+    }
+
+    .activeStepTitle {
+        color: #ffffff;
+    }
+}
