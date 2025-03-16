@@ -43,7 +43,7 @@ export async function exportStudentData(setExportingStep: (step: number) => void
         const zipUrl: string = URL.createObjectURL(content);
         const zipA: HTMLAnchorElement = document.createElement("a");
         zipA.href = zipUrl;
-        zipA.download = "studentData.zip";
+        zipA.download = `export-${studentData.name}.zip`;
         zipA.click();
         URL.revokeObjectURL(zipUrl);
     });
