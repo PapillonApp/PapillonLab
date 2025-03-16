@@ -27,7 +27,7 @@ const ExportData: React.FC<ExportDataProps> = ({ collectedDatas }) => {
     }
 
     return (
-        <div style={{position: "relative", width: "100%", height: "50svh"}}>
+        <div className={styles.container }>
             <div style={{display: "flex", flexDirection: "column", gap: 10, position: "absolute"}} className={`${exporting ? styles.slideout : ""}`}>
                 <div className={styles.title}>
                     <Share />
@@ -36,7 +36,7 @@ const ExportData: React.FC<ExportDataProps> = ({ collectedDatas }) => {
                 <div className={styles.subtitle}>
                     Télécharge un fichier contenant toutes tes données de scolarité enregistrées sur ton service scolaire. Ces données sont directement récupérées depuis ton service scolaire et ne transitent jamais par un serveur tiers.
                 </div>
-                <span className={styles.subtitle} style={{ marginTop: 10 }}>Tes données exportées incluront :</span>
+                <span className={`${styles.subtitle} ${styles.exportedDataText}`} style={{ marginTop: 10 }}>Tes données exportées incluront :</span>
                 <div className={styles.datasContainer}>
                     {collectedDatas.map((data, index) => (
                         <InformativeBox key={index} icon={data.icon}>{data.label}</InformativeBox>
