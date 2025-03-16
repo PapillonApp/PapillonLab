@@ -52,6 +52,7 @@
 }
 
 .slideout {
+    pointer-events: none;
     animation: slideOutLeft 0.5s ease-out forwards;
 }
 
