@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "jsqr": "^1.4.0",
+    "jszip": "^3.10.1",
     "lucide-react": "^0.479.0",
     "next": "15.2.1",
     "pawnote": "^1.4.1",
