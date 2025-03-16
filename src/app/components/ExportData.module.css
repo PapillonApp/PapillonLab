@@ -29,6 +29,40 @@
     padding-top: 5px;
 }
 
+@keyframes slideOutLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-70%);
+      opacity: 0;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+}
+
+.slideout {
+    animation: slideOutLeft 0.5s ease-out forwards;
+}
+
+.slidein {
+    animation: slideInRight 0.5s ease-out 0.15s forwards;
+}
+
+.slideout, .slidein {
+    z-index: 10;
+}
+
 @media (prefers-color-scheme: dark) {
     .title {
         color: #FFF;

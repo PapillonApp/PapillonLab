@@ -1,0 +1,55 @@
+.stepsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.stepContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.stepCircle {
+    background-color: #EBEBEB;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Fixel Text", sans-serif;
+    color: #737373;
+    transition: all 0.3s;
+}
+
+.stepLine {
+    width: 4px;
+    height: 15px;
+    background-color: #EBEBEB;
+    margin-left: 18px;
+}
+
+.activeCircle {
+    background-color: #004F89;
+    color: white;
+}
+
+.inProgressStepLine {
+    background: linear-gradient(180deg, #004F89 0%, #EBEBEB 90%);
+}
+
+.activeStepLine {
+    background-color: #004F89;
+}
+
+.stepTitle {
+    font-family: "Fixel Text", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #9f9f9f;
+}
+
+.activeStepTitle {
+    color: #004F89;
+}

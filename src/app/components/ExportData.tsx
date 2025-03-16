@@ -1,7 +1,10 @@
-import { LucideIcon, Share } from "lucide-react";
+import { LucideIcon, Share, TrafficCone } from "lucide-react";
 import styles from "./ExportData.module.css";
 import InformativeBox from "./InformativeBox";
 import Button from "./Button";
+import React from "react";
+import PapillonSteps from "./PapillonSteps";
+import { exportStudentData } from "../func/ExportStudentData";
 
 interface DataType {
     label?: string;
@@ -13,23 +16,52 @@ interface ExportDataProps {
 }
 
 const ExportData: React.FC<ExportDataProps> = ({ collectedDatas }) => {
+    const [exporting, setExporting] = React.useState<boolean>(false);
+    const [exportingStep, setExportingStep] = React.useState<number>(0);
+
+    const handleBtnPress = async () => {
+        console.log("Exporting data...");
+        setExporting(true);
+        await exportStudentData();
+        setExportingStep(4);
+    }
+
     return (
-        <div style={{display: "flex", flexDirection: "column", gap: 10}}>
-            <div className={styles.title}>
-                <Share />
-                Exporter mes données
+        <div style={{position: "relative", width: "100%", height: "50svh"}}>
+            <div style={{display: "flex", flexDirection: "column", gap: 10, position: "absolute"}} className={`${exporting ? styles.slideout : ""}`}>
+                <div className={styles.title}>
+                    <Share />
+                    Exporter mes données
+                </div>
+                <div className={styles.subtitle}>
+                    Télécharge un fichier contenant toutes tes données de scolarité enregistrées sur ton service scolaire. Ces données sont directement récupérées depuis ton service scolaire et ne transitent jamais par un serveur tiers.
+                </div>
+                <span className={styles.subtitle} style={{ marginTop: 10 }}>Tes données exportées incluront :</span>
+                <div className={styles.datasContainer}>
+                    {collectedDatas.map((data, index) => (
+                        <InformativeBox key={index} icon={data.icon}>{data.label}</InformativeBox>
+                    ))}
+                </div>
+                <div style={{paddingTop: 10}}>
+                    <Button centered withShadow onPress={handleBtnPress}><span style={{height: 40, alignItems: "center", display: "flex"}}>Exporter mes données</span></Button>
+                </div>
             </div>
-            <div className={styles.subtitle}>
-                Télécharge un fichier contenant toutes tes données de scolarité enregistrées sur ton service scolaire. Ces données sont directement récupérées depuis ton service scolaire et ne transitent jamais par un serveur tiers.
-            </div>
-            <span className={styles.subtitle} style={{ marginTop: 10 }}>Tes données exportées incluront :</span>
-            <div className={styles.datasContainer}>
-                {collectedDatas.map((data, index) => (
-                    <InformativeBox key={index} icon={data.icon}>{data.label}</InformativeBox>
-                ))}
-            </div>
-            <div style={{paddingTop: 10}}>
-                <Button centered withShadow><span style={{height: 40, alignItems: "center", display: "flex"}}>Exporter mes données</span></Button>
+            <div style={{display: "flex", flexDirection: "column", gap: 10, transform: "translateX(1000%)"}} className={`${exporting ? styles.slidein : ""}`}>
+                <div className={styles.title}>
+                    <TrafficCone />
+                    Exportation des données en cours
+                </div>
+                <div className={styles.subtitle}>
+                    Télécharge un fichier contenant toutes tes données de scolarité enregistrées sur ton service scolaire. Ces données sont directement récupérées depuis ton service scolaire et ne transitent jamais par un serveur tiers.
+                </div>
+                <div style={{ marginTop: 10 }}>
+                    <PapillonSteps steps={[
+                        { title: "Connexion au service scolaire"},
+                        { title: "Récupération des données"},
+                        { title: "Préparation du fichier"},
+                        { title: "Téléchargement"}
+                    ]} currentStep={exportingStep}/>
+                </div>
             </div>
         </div>
     )
