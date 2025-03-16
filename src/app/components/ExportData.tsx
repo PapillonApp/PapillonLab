@@ -22,7 +22,7 @@ const ExportData: React.FC<ExportDataProps> = ({ collectedDatas }) => {
     const handleBtnPress = async () => {
         console.log("Exporting data...");
         setExporting(true);
-        await exportStudentData();
+        await exportStudentData(setExportingStep);
         setExportingStep(4);
     }
 
