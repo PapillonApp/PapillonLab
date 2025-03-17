@@ -1,5 +1,5 @@
 "use client";
-import { Share, User, WandSparkles, Image as ImageIcon, Calendar, ChartPie, School, MoreHorizontal } from "lucide-react";
+import { Share, User, WandSparkles, Image as ImageIcon, Calendar, ChartPie, School, MoreHorizontal, Book } from "lucide-react";
 import styles from "./dashboard.module.css";
 import { useState, useEffect } from "react";
 import PapillonSidebar from "../components/PapillonSidebar";
@@ -7,6 +7,7 @@ import ExportData from "../components/ExportData";
 import defaultProfilePicture from "../../../public/assets/defaultProfilePicture.jpg"
 import { useRouter } from "next/navigation";
 import { refreshSession } from "../utils/Authentication";
+import ExportMagicData from "../components/ExportMagicData";
 
 export default function Dashboard() {
     const [activeTab, setActiveTab] =  useState<number>(0)
@@ -56,8 +57,7 @@ export default function Dashboard() {
                     },
                     {
                         label: "Papillon Magic+",
-                        leading: <WandSparkles absoluteStrokeWidth={true} size={20} />,
-                        disabled: true
+                        leading: <WandSparkles absoluteStrokeWidth={true} size={20} />
                     }]}
                     profilePic={profilePic}
                     name={name}
@@ -85,6 +85,18 @@ export default function Dashboard() {
                             {
                                 label: "Tes absences et retards",
                                 icon: School
+                            },
+                            {
+                                label: "Données diverses",
+                                icon: MoreHorizontal
+                            },
+                        ]} />
+                    )}
+                    {activeTab == 1 && (
+                        <ExportMagicData collectedDatas={[
+                            {
+                                label: "Tes devoirs",
+                                icon: Book
                             },
                             {
                                 label: "Données diverses",
