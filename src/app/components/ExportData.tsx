@@ -43,7 +43,7 @@ const ExportData: React.FC<ExportDataProps> = ({ collectedDatas }) => {
                     ))}
                 </div>
                 <div style={{paddingTop: 10}}>
-                    <Button centered withShadow onPress={handleBtnPress}><span style={{height: 40, alignItems: "center", display: "flex"}}>Exporter mes données</span></Button>
+                    <Button centered onPress={handleBtnPress}><span style={{height: 40, alignItems: "center", display: "flex"}}>Exporter mes données</span></Button>
                 </div>
             </div>
             <div style={{display: "flex", flexDirection: "column", gap: 10, transform: "translateX(1000%)"}} className={`${exporting ? styles.slidein : ""}`}>
