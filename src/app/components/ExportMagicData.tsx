@@ -1,10 +1,11 @@
-import { LucideIcon, Share, TrafficCone } from "lucide-react";
+import { LucideIcon, MicVocal, Share, Sparkles, TrafficCone } from "lucide-react";
 import styles from "./ExportData.module.css";
 import InformativeBox from "./InformativeBox";
 import Button from "./Button";
 import React from "react";
 import { exportMagicDataset } from "../func/ExportMagicData";
 import PapillonSteps from "./PapillonSteps";
+import MagicButton from "./MagicButton";
 
 interface DataType {
     label?: string;
@@ -37,6 +38,12 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = ({ collectedDatas }) => 
                 </div>
                 <span className={`${styles.subtitle} ${styles.exportedDataText}`} style={{ marginTop: 10 }}>Tes données exportées incluront :</span>
                 <div className={styles.datasContainer}>
+                    <MagicButton icon={Sparkles} label="Évaluation" color="FF9514"/>
+                    <MagicButton icon={MicVocal} label="Devoir Maison" color="BD14FF" keybind="D"/>
+                    <MagicButton icon={MicVocal} label="Compte Rendu" color="CE5347" keybind="F"/>
+                    <MagicButton icon={MicVocal} label="Présentations Orales" color="145FFF" keybind="G"/>
+                    <MagicButton icon={MicVocal} label="Lecture" color="13c35d" keybind="H"/>
+                    <MagicButton icon={MicVocal} label="Aucun" color="AFAFAF" keybind="Suppr"/>
                     {collectedDatas.map((data, index) => (
                         <InformativeBox key={index} icon={data.icon}>{data.label}</InformativeBox>
                     ))}
