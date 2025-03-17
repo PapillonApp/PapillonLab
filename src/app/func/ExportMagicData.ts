@@ -9,16 +9,10 @@ export async function exportMagicDataset(setExportingStep: (step: number) => voi
     console.log("Session Refreshed");
 
     setExportingStep(2); // Récupération des données
-    const studentData = {
-        name: session.user.name,
-        className: session.userResource.className ?? "Aucune classe",
-    };
-    
+    const name = session.user.name;
     const AssignmentsData: Assignment[] = await assignmentsFromWeek(session, 1, translateToWeekNumber(session.instance.lastDate, session.instance.firstDate));
 
-
     setExportingStep(3); // Formatage des données
-
     const cleanedAssignments = AssignmentsData.map(assignment => 
         assignment.description.replace(/<\/?[^>]+(>|$)/g, "")
     );
@@ -32,16 +26,14 @@ export async function exportMagicDataset(setExportingStep: (step: number) => voi
         };
     });
 
-
     const zip = new JSZip();
     zip.file("assignmentsData.json", JSON.stringify(categorizedAssignments, null, 2));
-    
     zip.generateAsync({ type: "blob" }).then((content: Blob) => {
         setExportingStep(5); // Téléchargement
         const zipUrl: string = URL.createObjectURL(content);
         const zipA: HTMLAnchorElement = document.createElement("a");
         zipA.href = zipUrl;
-        zipA.download = `MagicDatasets-${studentData.name}.zip`;
+        zipA.download = `MagicDatasets-${name}.zip`;
         zipA.click();
         URL.revokeObjectURL(zipUrl);
     });
