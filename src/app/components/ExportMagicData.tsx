@@ -4,6 +4,7 @@ import React from "react";
 import { exportMagicDataset } from "../func/ExportMagicData";
 import PapillonSteps from "./PapillonSteps";
 import MagicButton from "./MagicButton";
+import Button from "./Button";
 
 interface DataType {
     label?: string;
@@ -49,6 +50,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
                         <MagicButton icon={MicVocal} label="Lecture" color="13c35d" keybind="H"/>
                         <MagicButton icon={MicVocal} label="Aucun" color="AFAFAF" keybind="Suppr"/>
                     </div>
+                    <Button centered withShadow onPress={handleBtnPress}><span style={{height: 40, alignItems: "center", display: "flex"}}>Exporter mes données</span></Button>
                 </div>
             </div>
             <div style={{display: "flex", flexDirection: "column", gap: 10, transform: "translateX(1000%)"}} className={`${exporting ? styles.slidein : ""}`}>
