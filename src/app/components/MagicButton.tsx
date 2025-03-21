@@ -4,7 +4,7 @@ import { useEffect } from "react";
 interface MagicButtonProps {
     label: string;
     color: string;
-    icon: LucideIcon;
+    icon?: LucideIcon;
     keybind?: string;
     onPress?: () => void;
 }
@@ -28,7 +28,7 @@ const MagicButton: React.FC<MagicButtonProps> = ({ label, color, icon: Icon, key
 
     return (
         <div className={styles.magicButton} style={{ background: `linear-gradient(180deg, #${color}90 0%, #${color} 100%)` }}>
-            {!keybind && <Icon fill="white" size={20} absoluteStrokeWidth={true} stroke="white"/>}
+            {!keybind && label !== "Aucun" && Icon && <Icon size={20} absoluteStrokeWidth={true} stroke="white"/>}
             <span className={styles.magicText}>{label}</span>
             {keybind && <span className={styles.keybind}>{keybind}</span>}
         </div>

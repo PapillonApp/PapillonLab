@@ -39,3 +39,51 @@ export async function exportMagicDataset(setExportingStep: (step: number) => voi
     });
 
 }
+
+export interface MagicAssignment {
+    description: string
+    type: string | null
+}
+
+export async function exportAssignements(): Promise<Array<MagicAssignment>> {
+    const session: SessionHandle = await refreshSession();
+    console.log("Session Refreshed");
+
+    const AssignmentsData: Assignment[] = await assignmentsFromWeek(session, 1, translateToWeekNumber(session.instance.lastDate, session.instance.firstDate));
+
+    const cleanedAssignments = AssignmentsData.map(assignment => 
+        assignment.description.replace(/<\/?[^>]+(>|$)/g, "")
+    );
+
+    const categorizedAssignments = cleanedAssignments.map(text => {
+        const category = detectCategory(text);
+        return {
+            "description": text,
+            "type": category
+        };
+    });
+
+    return categorizedAssignments
+}
+
+export async function exportCategorizedAssignments(assignments: Array<MagicAssignment>): Promise<void> {
+    const categorizedAssignments = assignments.map(assignment => {
+        if (assignment.type === "none") {
+            assignment.type = null;
+        }
+        return assignment;
+    });
+
+    const zip = new JSZip();
+    zip.file("assignmentsData.json", JSON.stringify(categorizedAssignments, null, 2));
+    zip.generateAsync({ type: "blob" }).then((content: Blob) => {
+        const zipUrl: string = URL.createObjectURL(content);
+        const zipA: HTMLAnchorElement = document.createElement("a");
+        zipA.href = zipUrl;
+        zipA.download = `MagicAssignments-${name}.zip`;
+        zipA.click();
+        URL.revokeObjectURL(zipUrl);
+    });
+
+    return;
+}

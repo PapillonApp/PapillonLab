@@ -26,7 +26,15 @@
     flex-wrap: wrap;
     gap: 10px;
     padding-top: 5px;
+    max-width: 80%;
 }
+
+@font-face {
+    font-family: "Fixel Text";
+    src: url("../../../public/fonts/FixelText-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+  }
 
 @keyframes slideOutLeft {
     from {
@@ -34,7 +42,7 @@
       opacity: 1;
     }
     to {
-      transform: translateX(-70%);
+      transform: translateX(-30%);
       opacity: 0;
     }
 }
