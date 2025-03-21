@@ -118,6 +118,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
             </div>
             <div style={{position: "absolute", bottom: 20, left: 20}}>
                 <Button onPress={() => {
+                    setDisabled(false)
                     setMagicStep(magicStep-1)
                 }} disabled={magicStep == 0}>Étape précédente</Button>
             </div>
