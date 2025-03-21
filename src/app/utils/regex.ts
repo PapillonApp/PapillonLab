@@ -1,5 +1,5 @@
 const detectionJson = {
-    "Évaluations": [
+    "evaluation": [
       "\\b(?:DS|devoir\\s(?:sur\\stable|surveillé(?:\\ssur\\s(?:le|la|les)\\schapitre\\s\\d+(?:\\s\\([^\\)]+\\))?)?|commun|blanc|écrit|oral|partiel|final|de\\sfin\\sde\\ssemestre|de\\srattrapage|de\\smi\\ssemestre|de\\smi\\strimestre|de\\sfin\\sd'année))\\b",
       "\\bdevoir\\s(?:surveillé)\\s(?:sur\\s(?:le|la|les)\\schapitre\\s\\d+(?:\\s\\([^\\)]+\\))?)\\b",
       "\\bdevoir\\s(?:à\\sfaire\\sen\\sclasse|en\\sclasse\\ssurveillé|sur\\stable|écrit|oral|noté|évalué|corrigé|important|final|partiel|de\\sfin\\sde\\ssemestre|de\\srattrapage|de\\smi\\ssemestre|de\\smi\\strimestre|de\\sfin\\sd'année)\\b",
@@ -25,7 +25,7 @@ const detectionJson = {
       "\\bprueba\\sde\\sespañol\\s(?:escrita|oral|de\\scomprensión|de\\sgramática|final|partiel|de\\sfin\\sde\\ssemestre|de\\srattrapage|de\\smi\\ssemestre|de\\smi\\strimestre|de\\sfin\\sd'année)\\b",
       "\\bDeutschtest\\s(?:schriftlich|mündlich|Hörverstehen|Leseverstehen|final|partiel|de\\sfin\\sde\\ssemestre|de\\srattrapage|de\\smi\\ssemestre|de\\smi\\strimestre|de\\sfin\\sd'année)\\b"
     ],
-    "Devoirs Maison": [
+    "homework": [
       "\\bDM\\b(?:\\s+\\w+){0,3}",
       "\\bdevoir\\s?maison\\b(?:\\s+\\w+){0,3}",
       "\\bdevoir\\s(?:à\\s(?:faire|la)\\s)?maison\\b(?:\\s+\\w+){0,3}",
@@ -41,7 +41,7 @@ const detectionJson = {
       "\\bessai\\s(?:à\\srédiger\\schez\\ssoi|personnel|argumentatif|critique|écrit|oral|noté|évalué|corrigé|final|partiel|de\\sfin\\sde\\ssemestre|de\\srattrapage|de\\smi\\ssemestre|de\\smi\\strimestre|de\\sfin\\sd'année)\\b",
       "\\bexposé\\s(?:à\\spréparer\\sà\\sla\\smaison|personnel|oral|écrit|noté|évalué|corrigé|final|partiel|de\\sfin\\sde\\ssemestre|de\\srattrapage|de\\smi\\ssemestre|de\\smi\\strimestre|de\\sfin\\sd'année)\\b"
     ],
-    "Tâche Finale": [
+    "finaltask": [
       "\\b(?:tâche\\sfinale|final\\stask)\\b(?:\\s+\\w+){0,3}",
       "\\bprojet\\sfinal\\b(?:\\s+\\w+){0,3}",
       "\\bfinal\\s(?:task|project|assignment|presentation)\\b(?:\\s+\\w+){0,3}",
@@ -49,7 +49,7 @@ const detectionJson = {
       "\\bévaluation\\s(?:finale|sommative|globale)\\b(?:\\s+\\w+){0,3}",
       "\\b(?:tâche|projet|évaluation)\\s(?:de\\sfin\\sde)\\s(?:séquence|chapitre|unité|module|trimestre|semestre|année|cours|programme|cycle|étude|formation)\\b"
     ],
-    "Présentations Orales": [
+    "oral": [
       "\\b(?:présentation|presentation)\\b(?:\\s+\\w+){0,3}",
       "\\boral\\b(?:\\s+\\w+){0,3}",
       "\\bprésentation\\s?orale\\b(?:\\s+\\w+){0,3}",
@@ -67,7 +67,7 @@ const detectionJson = {
       "\\bconférence\\s?orale\\b(?:\\s+\\w+){0,3}",
       "\\bcompte-rendu\\s?oral\\b(?:\\s+\\w+){0,3}"
     ],
-    "Fiches": [
+    "sheets": [
       "\\bfaire\\s(?:une?|des|la|les)\\sfiche(?:s)?\\b(?:\\s+\\w+){0,3}",
       "\\bcréer\\s(?:une?|des|la|les)\\sfiche(?:s)?\\b(?:\\s+\\w+){0,3}",
       "\\brédiger\\s(?:une?|des|la|les)\\sfiche(?:s)?\\b(?:\\s+\\w+){0,3}",
@@ -76,7 +76,7 @@ const detectionJson = {
       "\\bfiche\\s(?:de\\s(?:lecture|révision|synthèse|travail|mémorisation|étude|analyse|recherche|cours|programme|cycle|formation))\\b(?:\\s+\\w+){0,3}",
       "\\bfiche\\s(?:récapitulative|résumé|mnémotechnique|d'exercices|de\\srévision|de\\ssynthèse|de\\stravail|de\\smémorisation|d'étude|d'analyse|de\\srecherche|de\\scours|de\\sprogramme|de\\scycle|de\\sformation)\\b(?:\\s+\\w+){0,3}"
     ],
-    "Compte rendu": [
+    "report": [
       "\\bcompte[-\\s]rendu\\s(?:de\\s(?:TP|travaux\\spratiques|lecture|expérience|stage|visite|projet|recherche|étude|travail\\sde\\sgroupe|analyse|observation|enquête|mission|activité|intervention|atelier|séance|cours|programme|cycle|formation))\\b",
       "\\brapport\\s(?:de\\s(?:stage|projet|recherche|laboratoire|expérience|étude|travail\\sde\\sgroupe|analyse|observation|enquête|mission|activité|intervention|atelier|séance|cours|programme|cycle|formation))\\b",
       "\\bcompte[-\\s]rendu\\s(?:de\\s(?:TP|travaux\\spratiques|lecture|expérience|stage|visite))\\b",
@@ -85,26 +85,26 @@ const detectionJson = {
       "\\banalyse\\sd'expérience\\s(?:scientifique|en\\slaboratoire|pratique)\\b",
       "\\brendu\\sfinal\\sde\\s(?:projet|recherche|étude|travail\\sde\\sgroupe)\\b"
     ],
-    "Lecture": [
+    "reading": [
       "\\blecture\\s(?:analytique|critique|commentée|approfondie|guidée)\\b",
       "\\banalyse\\sde\\stexte\\s(?:littéraire|historique|philosophique|scientifique)\\b",
       "\\bétude\\sde\\stexte\\s(?:dirigée|approfondie|comparative|thématique)\\b",
       "\\bétude\\sd'(?:œuvre|ouvrage)\\s(?:intégrale|complète|littéraire|classique)\\b"
     ],
-    "Projet": [
+    "project": [
       "\\bprojet\\sde\\sgroupe\\s(?:collaboratif|interdisciplinaire|innovant|créatif)\\b",
       "\\bprojet\\spratique\\s(?:en\\s(?:sciences|technologie|arts|informatique))\\b",
       "\\bprojet\\sd'application\\s(?:des\\sconnaissances|pratique|théorique)\\b",
       "\\bprojet\\sde\\srecherche\\s(?:individuel|collectif|scientifique|documentaire)\\b"
     ],
-    "Analyse": [
+    "analysis": [
       "\\bdissertation\\s(?:argumentative|comparative|critique|philosophique)\\b",
       "\\bessai\\s(?:argumentatif|critique|analytique|réflexif)\\b",
       "\\bexposé\\s(?:oral|écrit)\\s(?:analytique|critique|comparatif)\\b",
       "\\banalyse\\s(?:littéraire|historique|scientifique|comparative|textuelle)\\b",
       "\\blecture\\scritique\\s(?:d'article|d'ouvrage|de\\sdocument|de\\spresse)\\b"
     ],
-    "Pratique": [
+    "practice": [
       "\\bexercice\\spratique\\s(?:en\\s(?:laboratoire|atelier|classe|terrain))\\b",
       "\\bmanip\\s|manipulation\\s\\notées\\s(?:en\\s(?:laboratoire|atelier|classe|salle\\sde\\sTP))\\b",
       "\\bTP\\s(?:de\\s(?:chimie|physique|biologie|informatique|SVT))\\b",
@@ -119,19 +119,23 @@ type DetectionJson = Record<string, string[]>;
 const detectionData: DetectionJson = detectionJson;
 
 function normalizeString (input: string): string {
+  input.toLowerCase().trim();
   return input.toLowerCase().replace(/[\s-]+/g, "");
 }
 
-function detectCategory (input: string): string | null {
-  const normalizedInput = normalizeString(input);
-
-  for (const [category, patterns] of Object.entries(detectionData)) {
-    if (patterns.some(pattern => new RegExp(pattern, "i").test(input))) {
-      return category;
+export function detectCategory(text: string): string {
+  const originalText = text; // Garde le texte original
+  const normalizedText = normalizeString(text);
+  
+  for (const category in detectionData) {
+    for (const pattern of detectionData[category]) {
+      const regex = new RegExp(pattern, 'i');
+      if (regex.test(originalText)) {
+        console.log(category);
+        return category;
+      }
     }
   }
-
-  return null;
+  
+  return "none";
 }
-
-export default detectCategory;

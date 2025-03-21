@@ -1,7 +1,7 @@
 import { Assignment, assignmentsFromWeek, SessionHandle, translateToWeekNumber } from "pawnote";
 import { refreshSession } from "../utils/Authentication";
 import JSZip from "jszip";
-import detectCategory from "../utils/regex";
+import { detectCategory } from "../utils/regex";
 
 export async function exportMagicDataset(setExportingStep: (step: number) => void): Promise<void> {
     setExportingStep(1); // Connexion au service scolaire
@@ -59,7 +59,7 @@ export async function exportAssignements(): Promise<Array<MagicAssignment>> {
         const category = detectCategory(text);
         return {
             "description": text,
-            "type": category
+            "type": category === "none" ? null : category
         };
     });
 
