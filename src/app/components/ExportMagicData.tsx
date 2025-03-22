@@ -150,7 +150,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
             )}
             <div style={{ flexDirection: "column", gap: 10, position: "absolute", visibility: magicStep == 2 ? "visible" : "hidden", opacity: magicStep === 2 ? 1 : 0, transition: "opacity 0.5s ease-in-out, visibility 0.5s ease-in-out", transform: "translateX(1000%)" }} className={`${magicStep !== 2 ? styles.slideout : styles.slidein}`}>
                 <div style={{display: "flex", alignItems: "center", justifyContent: "center", marginTop: 30, flexDirection: "column"}}>
-                    <Download color="#FFFFFF80" absoluteStrokeWidth size={50} strokeWidth={5}/>
+                    <Download absoluteStrokeWidth size={50} strokeWidth={5} className={styles.icon} />
                     <div style={{marginTop: 20}} className={styles.title}>C&apos;est tout bon !</div>
                     <span className={styles.subtitle} style={{ width: "fit-content"}}>Un téléchargement vient de commencer, il contient tes données catégoriser</span>
                 </div>
