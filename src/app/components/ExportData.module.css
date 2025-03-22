@@ -29,6 +29,10 @@
     max-width: 80%;
 }
 
+.icon {
+    color: #004F89;
+}
+
 @font-face {
     font-family: "Fixel Text";
     src: url("../../../public/fonts/FixelText-Regular.woff2") format("woff2");
@@ -104,6 +108,10 @@
         color: white;
         background-color: #121212;
         border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .icon {
+        color: #FFFFFF70;
     }
 }
 

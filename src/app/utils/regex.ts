@@ -118,14 +118,8 @@ type DetectionJson = Record<string, string[]>;
 
 const detectionData: DetectionJson = detectionJson;
 
-function normalizeString (input: string): string {
-  input.toLowerCase().trim();
-  return input.toLowerCase().replace(/[\s-]+/g, "");
-}
-
 export function detectCategory(text: string): string {
-  const originalText = text; // Garde le texte original
-  const normalizedText = normalizeString(text);
+  const originalText = text;
   
   for (const category in detectionData) {
     for (const pattern of detectionData[category]) {

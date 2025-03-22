@@ -129,7 +129,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
             </div>
             <div style={{ flexDirection: "column", gap: 10, position: "absolute", visibility: magicStep == 0 ? "visible" : "hidden", opacity: magicStep === 0 ? 1 : 0, transition: "opacity 0.5s ease-in-out, visibility 0.5s ease-in-out", transform: "translateX(1000%)" }} className={`${magicStep !== 0 ? styles.slideout : styles.slidein}`}>
                 <div style={{display: "flex", alignItems: "center", justifyContent: "center", marginTop: 30, flexDirection: "column"}}>
-                    <FileQuestion color="#FFFFFF80" absoluteStrokeWidth size={50} strokeWidth={5}/>
+                    <FileQuestion absoluteStrokeWidth size={50} strokeWidth={5} className={styles.icon}/>
                     <div style={{marginTop: 20}} className={styles.title}>Aucune donnée</div>
                     <span className={styles.subtitle} style={{ width: "fit-content"}}>Appuyez sur étape suivante afin de collecter vos devoirs et pouvoir les classifier</span>
                 </div>
