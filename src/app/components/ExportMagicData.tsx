@@ -130,7 +130,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
                     } else {
                         handleNextStep()
                     }
-                }} disabled={disabled}>{magicStep == 1 ? "Prochain devoir" : "Étape suivante"}</Button>
+                }} disabled={disabled}>{magicStep == 1 ? `Prochain devoir (${currentAssignmentIndex+1}/${assignments.length})` : "Étape suivante"}</Button>
             </div>
             <div style={{ flexDirection: "column", gap: 10, position: "absolute", visibility: magicStep == 0 ? "visible" : "hidden", opacity: magicStep === 0 ? 1 : 0, transition: "opacity 0.5s ease-in-out, visibility 0.5s ease-in-out", transform: "translateX(1000%)" }} className={`${magicStep !== 0 ? styles.slideout : styles.slidein}`}>
                 <div style={{display: "flex", alignItems: "center", justifyContent: "center", marginTop: 30, flexDirection: "column"}}>
