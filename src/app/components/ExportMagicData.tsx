@@ -43,6 +43,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
             const assignments = await exportAssignements();
             setAssignments(assignments);
             setMagicStep(magicStep+1);
+            setDisabled(false)
         }
         if (magicStep == 1) {
             setCurrentAssignmentIndex(0);
@@ -124,8 +125,12 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
             </div>
             <div style={{position: "absolute", bottom: 20, right: 20}}>
                 <Button onPress={() => {
-                    handleNextStep()
-                }} disabled={disabled || (magicStep == 1 && !categorizeFinish)}>Étape suivante</Button>
+                    if (magicStep == 1) {
+                        handleSetAssignmentType(assignments[currentAssignmentIndex].type ?? "none");
+                    } else {
+                        handleNextStep()
+                    }
+                }} disabled={disabled}>{magicStep == 1 ? "Prochain devoir" : "Étape suivante"}</Button>
             </div>
             <div style={{ flexDirection: "column", gap: 10, position: "absolute", visibility: magicStep == 0 ? "visible" : "hidden", opacity: magicStep === 0 ? 1 : 0, transition: "opacity 0.5s ease-in-out, visibility 0.5s ease-in-out", transform: "translateX(1000%)" }} className={`${magicStep !== 0 ? styles.slideout : styles.slidein}`}>
                 <div style={{display: "flex", alignItems: "center", justifyContent: "center", marginTop: 30, flexDirection: "column"}}>
