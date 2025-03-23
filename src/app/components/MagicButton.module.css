@@ -15,6 +15,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 18.092px; /* 120% */
+    pointer-events: none;
 }
 
 .keybind {
@@ -34,4 +35,5 @@
     font-style: normal;
     font-weight: 600;
     line-height: 23.813px; /* 158.754% */
+    pointer-events: none;
 }

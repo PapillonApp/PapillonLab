@@ -12,7 +12,7 @@ interface MagicButtonProps {
 const MagicButton: React.FC<MagicButtonProps> = ({ label, color, icon: Icon, keybind, onPress }) => {
     useEffect(() => {    
         const handleKeyPress = (event: KeyboardEvent) => {
-            if (keybind && event.key === keybind.toLowerCase()) {
+            if (keybind === "Suppr" ? event.key === "Backspace" : keybind && event.key === keybind.toLowerCase()) {
                 if (onPress) {
                     onPress();
                 }
@@ -27,7 +27,7 @@ const MagicButton: React.FC<MagicButtonProps> = ({ label, color, icon: Icon, key
     }, [keybind, onPress]);
 
     return (
-        <div className={styles.magicButton} style={{ background: `linear-gradient(180deg, #${color}90 0%, #${color} 100%)` }}>
+        <div className={styles.magicButton} style={{ background: `linear-gradient(180deg, #${color}90 0%, #${color} 100%)`, cursor: "pointer" }} onClick={onPress}>
             {!keybind && label !== "Aucun" && Icon && <Icon size={20} absoluteStrokeWidth={true} stroke="white"/>}
             <span className={styles.magicText}>{label}</span>
             {keybind && <span className={styles.keybind}>{keybind}</span>}
