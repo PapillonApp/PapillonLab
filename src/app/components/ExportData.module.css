@@ -140,3 +140,14 @@
     }
 }
 
+.fileSelectorContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 2000px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch; 
+    position: relative;
+    pointer-events:auto;
+    z-index: 1
+}

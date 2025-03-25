@@ -87,3 +87,22 @@ export async function exportCategorizedAssignments(assignments: Array<MagicAssig
 
     return;
 }
+
+export function readFile(file: File): Promise<Array<MagicAssignment>> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            try {
+                const content = e.target?.result as string;
+                resolve(JSON.parse(content) as Array<MagicAssignment>);
+            } catch (error) {
+                reject(error);
+            }
+        };
+
+        reader.onerror = (error) => reject(error);
+
+        reader.readAsText(file);
+    });
+}

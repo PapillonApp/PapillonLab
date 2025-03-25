@@ -1,7 +1,7 @@
-import { CircleHelp, Download, FileQuestion, FileSpreadsheet, LucideIcon, MicVocal, Sparkles } from "lucide-react";
+import { CircleHelp, Download, FileQuestion, FileSearch, FileSpreadsheet, LucideIcon, MicVocal, Sparkles } from "lucide-react";
 import styles from "./ExportData.module.css";
-import React, { useEffect } from "react";
-import { exportAssignements, exportCategorizedAssignments, MagicAssignment } from "../func/ExportMagicData";
+import React, { useEffect, useRef } from "react";
+import { exportAssignements, exportCategorizedAssignments, MagicAssignment, readFile } from "../func/ExportMagicData";
 import MagicButton from "./MagicButton";
 import Button from "./Button";
 
@@ -31,16 +31,23 @@ const getCurrentMagicButtonForAssignment = (assignment: MagicAssignment) => {
 const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
     const [magicStep, setMagicStep] = React.useState<number>(0);
     const [disabled, setDisabled] = React.useState<boolean>(false);
+    const [selectedFile, setSelectedFile] = React.useState<File>();
     const [categorizeFinish, setCategorizeFinish] = React.useState<boolean>(false);
     const [assignments, setAssignments] = React.useState<Array<MagicAssignment>>([]);
     
     const [currentAssignmentIndex, setCurrentAssignmentIndex] = React.useState<number>(0);
-
+    const acceptedTypes = ["application/json"]
+    const maxSize = 5;
     const handleNextStep = async () => {
         console.log("Exporting data...");
         if (magicStep == 0) {
             setDisabled(true)
-            const assignments = await exportAssignements();
+            let assignments: Array<MagicAssignment> = [];
+            if (!selectedFile) {
+                assignments = await exportAssignements();
+            } else {
+                assignments = await readFile(selectedFile);
+            }
             setAssignments(assignments);
             setMagicStep(magicStep+1);
             setDisabled(false)
@@ -61,6 +68,46 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
             setCategorizeFinish(true);
             handleNextStep();
             exportCategorizedAssignments(assignments);
+        }
+    }
+    
+    const fileInputRef = useRef<HTMLInputElement>(null); 
+    const handleFileSelection = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const onFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const selectedFiles = Array.from(e.target.files);
+            handleFileUpload(selectedFiles[0])
+        }
+    };
+
+    function isValidMagicAssignmentArray(data: any): data is MagicAssignment[] {
+        return (
+            Array.isArray(data) &&
+            data.every(item =>
+                typeof item === "object" &&
+                typeof item.description === "string" &&
+                (typeof item.type === "string" || item.type === null)
+            )
+        );
+    }
+
+    const handleFileUpload = async (file: File) => {
+        if (file.size > maxSize * 1e6) return
+        if (!acceptedTypes.includes(file.type)) return
+        try {
+            const assignments = await readFile(file);
+            if (!isValidMagicAssignmentArray(assignments)) {
+                return;
+            }
+    
+            setSelectedFile(file);
+        } catch (error) {
+            console.error("Impossible de lire le fichier", error);
         }
     }
 
@@ -123,7 +170,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
                     setMagicStep(magicStep-1)
                 }} disabled={magicStep == 0}>Étape précédente</Button>
             </div>
-            <div style={{position: "absolute", bottom: 20, right: 20}}>
+            <div style={{position: "absolute", bottom: 20, right: 20, display: "flex", gap: 10, width: "fit-content"}}>
                 <Button onPress={() => {
                     if (magicStep == 1) {
                         handleSetAssignmentType(assignments[currentAssignmentIndex].type ?? "none");
@@ -137,6 +184,20 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
                     <FileQuestion absoluteStrokeWidth size={50} strokeWidth={5} className={styles.icon}/>
                     <div style={{marginTop: 20}} className={styles.title}>Aucune donnée</div>
                     <span className={styles.subtitle} style={{ width: "fit-content"}}>Appuyez sur étape suivante afin de collecter vos devoirs et pouvoir les classifier</span>
+                    <div style={{marginTop: 20}}>
+                        <Button
+                            leading={<FileSearch absoluteStrokeWidth={true} size={20} />}
+                            variant="border"
+                            onPress={handleFileSelection}
+                        >{selectedFile ? selectedFile.name : "Choisir un fichier"}</Button>
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept={acceptedTypes.map((ext) => `.${ext}`).join(", ")}
+                            style={{ display: "none", pointerEvents: "none" }}
+                            onChange={onFileSelect}
+                        />
+                    </div>
                 </div>
             </div>
             {magicStep == 1 && (
