@@ -1,0 +1,16 @@
+services:
+  cors-anywhere:
+    build:
+      context: ./cors-anywhere
+    ports:
+      - "8080:8080"
+
+  papillonlabs:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - cors-anywhere
+    environment:
+      - PORT=3000

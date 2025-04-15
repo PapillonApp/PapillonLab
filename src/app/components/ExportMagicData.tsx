@@ -32,7 +32,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
     const [magicStep, setMagicStep] = React.useState<number>(0);
     const [disabled, setDisabled] = React.useState<boolean>(false);
     const [selectedFile, setSelectedFile] = React.useState<File>();
-    const [categorizeFinish, setCategorizeFinish] = React.useState<boolean>(false);
+    const [, setCategorizeFinish] = React.useState<boolean>(false);
     const [assignments, setAssignments] = React.useState<Array<MagicAssignment>>([]);
     
     const [currentAssignmentIndex, setCurrentAssignmentIndex] = React.useState<number>(0);
@@ -85,7 +85,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
         }
     };
 
-    function isValidMagicAssignmentArray(data: any): data is MagicAssignment[] {
+    function isValidMagicAssignmentArray(data: unknown): data is MagicAssignment[] {
         return (
             Array.isArray(data) &&
             data.every(item =>
@@ -127,6 +127,7 @@ const ExportMagicData: React.FC<ExportMagicDataProps> = () => {
             return () => {
                 window.removeEventListener("keydown", handleKeyPress);
             };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentAssignmentIndex, magicStep]);
 
     const getOtherMagicButtonForAssignment = (assignment: MagicAssignment) => {
