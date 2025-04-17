@@ -14,5 +14,11 @@ Papillon Labs est un outil conçu pour t'aider à exporter facilement toutes les
 3. **Partage:** Si tu souhaites aider à améliorer Papillon, tu peux envoyer les données exportées directement. Mais souviens-toi, rien n'est partagé à moins que tu choisisses de l'envoyer.
 
 # Installation
-> [!IMPORTANT]
-> Cette documentation est en cours de rédaction. Si vous avez des questions, n'hésitez pas à nous contacter à l'adresse suivante : [support@papillon.bzh](mailto:support@papillon.bzh).
+```bash
+git clone https://github.com/raphckrman/PapillonLab.git
+cd ./PapillonLab
+cd cors-anywhere
+git submodule update --init --recursive
+cd ../
+docker compose up
+```
