@@ -57,7 +57,8 @@ export default function Dashboard() {
                     },
                     {
                         label: "Papillon Magic+",
-                        leading: <WandSparkles absoluteStrokeWidth={true} size={20} />
+                        leading: <WandSparkles absoluteStrokeWidth={true} size={20} />,
+                        disabled: true
                     }]}
                     profilePic={profilePic}
                     name={name}
