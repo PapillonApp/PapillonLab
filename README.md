@@ -1,4 +1,4 @@
-![Papillon Labs](https://raw.githubusercontent.com/raphckrman/PapillonLab/refs/heads/rework-ui/.github/assets/banner.svg?token=GHSAT0AAAAAAC35QUUUWDQLXNC425Q4EVBGZ6TKPPQ)
+![Papillon Labs](https://raw.githubusercontent.com/PapillonApp/PapillonLab/refs/heads/main/.github/assets/banner.svg)
 
 #
 
