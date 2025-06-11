@@ -47,7 +47,7 @@ Papillon Labs te permet de récupérer facilement toutes les données de ton com
 ### 🛠️ Installation rapide
 
 ```bash
-git clone https://github.com/raphckrman/PapillonLab.git
+git clone https://github.com/PapillonApp/PapillonLab.git
 cd ./PapillonLab
 cd cors-anywhere
 git submodule update --init --recursive
